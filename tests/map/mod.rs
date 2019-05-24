@@ -1,4 +1,4 @@
-use ::coord::*;
+use coord::prelude::*;
 
 #[test]
 fn map_test() {
