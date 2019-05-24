@@ -19,6 +19,11 @@ fn map_to_rect() {
 }
 
 #[test]
+fn map_single_element_tuple() {
+    assert_eq!(Point::new(1, 2), (Point::new(1, 2),).map(|(n,)| n))
+}
+
+#[test]
 fn map_pair() {
     assert_eq!(
         Point::new(103, 208),
