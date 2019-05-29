@@ -140,7 +140,7 @@ impl<T: Axis + Zero> Zero for Vector<T> {
     }
 }
 
-impl<T: Axis + Float + From<f64>> Vector<T> {
+impl<T: Axis + Float> Vector<T> {
     /// # Examples
     /// ```
     /// use coord::Vector;
