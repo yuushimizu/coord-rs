@@ -10,7 +10,7 @@ pub trait ExpandBy<T: Axis> {
 }
 
 impl<U: Axis, T: Axis + Add<U, Output = T>> ExpandBy<U> for Size<T> {
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Size;
     /// use coord::Vector;
@@ -26,7 +26,7 @@ impl<T: Axis, U: Axis> ExpandBy<U> for Rect<T>
 where
     Size<T>: ExpandBy<U>,
 {
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Rect;
     /// use coord::Point;

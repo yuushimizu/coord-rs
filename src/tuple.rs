@@ -5,10 +5,22 @@ impl<T: Axis, C: Coord<T>> Coord<(T,)> for (C,) {
         (C::from_x_y(x.0, y.0),)
     }
 
+    /// # Examples
+    /// ```
+    /// use coord::Coord;
+    /// use coord::Point;
+    /// assert_eq!((10,), (Point::new(10, 20),).x());
+    /// ```
     fn x(&self) -> (T,) {
         (self.0.x(),)
     }
 
+    /// # Examples
+    /// ```
+    /// use coord::Coord;
+    /// use coord::Point;
+    /// assert_eq!((20,), (Point::new(10, 20),).y());
+    /// ```
     fn y(&self) -> (T,) {
         (self.0.y(),)
     }

@@ -7,7 +7,7 @@ use std::ops::{Add, Sub};
 impl<U: Axis, T: Axis + Add<U, Output = impl Axis>> Add<Vector<U>> for Point<T> {
     type Output = Point<<T as Add<U>>::Output>;
 
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Point;
     /// use coord::Vector;
@@ -21,7 +21,7 @@ impl<U: Axis, T: Axis + Add<U, Output = impl Axis>> Add<Vector<U>> for Point<T> 
 impl<U: Axis, T: Axis + Sub<U, Output = impl Axis>> Sub<Vector<U>> for Point<T> {
     type Output = Point<<T as Sub<U>>::Output>;
 
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Point;
     /// use coord::Vector;
@@ -35,7 +35,7 @@ impl<U: Axis, T: Axis + Sub<U, Output = impl Axis>> Sub<Vector<U>> for Point<T> 
 impl<U: Axis, T: Axis + Sub<U, Output = impl Axis>> Sub<Point<U>> for Point<T> {
     type Output = Vector<<T as Sub<U>>::Output>;
 
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Point;
     /// use coord::Vector;

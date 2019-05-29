@@ -13,7 +13,7 @@ impl<T: Axis> Rect<T> {
         Self { origin, size }
     }
 
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Rect;
     /// use coord::Point;
@@ -24,7 +24,7 @@ impl<T: Axis> Rect<T> {
         self.origin
     }
 
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Rect;
     /// use coord::Point;
@@ -39,7 +39,7 @@ impl<T: Axis> Rect<T> {
 pub type RectAxis<T> = (T, T);
 
 impl<T: Axis> Coord<(T, T)> for Rect<T> {
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Rect;
     /// use coord::Point;
@@ -51,7 +51,7 @@ impl<T: Axis> Coord<(T, T)> for Rect<T> {
         Self::new(Point::new(x_origin, y_origin), Size::new(x_size, y_size))
     }
 
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Rect;
     /// use coord::Point;
@@ -63,7 +63,7 @@ impl<T: Axis> Coord<(T, T)> for Rect<T> {
         (self.origin().x(), self.size().x())
     }
 
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Rect;
     /// use coord::Point;

@@ -10,11 +10,11 @@ pub trait StepAxis: Clone + Zero + One + ToPrimitive + PartialOrd + CheckedAdd {
 impl<T: Clone + Zero + One + ToPrimitive + PartialOrd + CheckedAdd> StepAxis for T {}
 
 impl<T: Axis + StepAxis> Size<T> {
-    fn points_step_by<R: Iterator<Item = T>, F: Fn(T, T, T) -> R>(
+    fn points_step_by<R: Iterator<Item = T>>(
         &self,
         origin: Point<T>,
         step: Vector<T>,
-        range_step: F,
+        range_step: impl Fn(T, T, T) -> R,
     ) -> impl Iterator<Item = Point<T>> {
         let stop_x = origin.x() + self.width();
         range_step(origin.y(), origin.y() + self.height(), step.y()).flat_map(move |y| {
@@ -22,7 +22,7 @@ impl<T: Axis + StepAxis> Size<T> {
         })
     }
 
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Size;
     /// use coord::Point;
@@ -38,7 +38,7 @@ impl<T: Axis + StepAxis> Size<T> {
         self.points_step_by(origin, step, range_step)
     }
 
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Size;
     /// use coord::Point;
@@ -53,7 +53,7 @@ impl<T: Axis + StepAxis> Size<T> {
         self.points_step(origin, Vector::new(T::one(), T::one()))
     }
 
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Size;
     /// use coord::Point;
@@ -74,7 +74,7 @@ impl<T: Axis + StepAxis> Size<T> {
         self.points_step_by(origin, step, range_step_inclusive)
     }
 
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Size;
     /// use coord::Point;
@@ -92,7 +92,7 @@ impl<T: Axis + StepAxis> Size<T> {
 }
 
 impl<T: Axis + StepAxis> Rect<T> {
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Rect;
     /// use coord::Point;

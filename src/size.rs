@@ -12,7 +12,7 @@ impl<T: Axis> Size<T> {
         Self { width, height }
     }
 
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Size;
     /// assert_eq!(10, Size::new(10, 20).width());
@@ -21,7 +21,7 @@ impl<T: Axis> Size<T> {
         self.width
     }
 
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Size;
     /// assert_eq!(20, Size::new(10, 20).height());
@@ -32,7 +32,7 @@ impl<T: Axis> Size<T> {
 }
 
 impl<T: Axis> Coord<T> for Size<T> {
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Size;
     /// use coord::Coord;
@@ -42,7 +42,7 @@ impl<T: Axis> Coord<T> for Size<T> {
         Self::new(x, y)
     }
 
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Size;
     /// use coord::Coord;
@@ -52,7 +52,7 @@ impl<T: Axis> Coord<T> for Size<T> {
         self.width()
     }
 
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Size;
     /// use coord::Coord;
@@ -64,7 +64,7 @@ impl<T: Axis> Coord<T> for Size<T> {
 }
 
 impl<T: Axis + Mul<T>> Size<T> {
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Size;
     /// assert_eq!(12, Size::new(3, 4).area());

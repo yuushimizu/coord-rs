@@ -11,7 +11,7 @@ impl<T: Axis> Point<T> {
         Self { x, y }
     }
 
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Point;
     /// assert_eq!(4, Point::new(4, 8).x());
@@ -20,7 +20,7 @@ impl<T: Axis> Point<T> {
         self.x
     }
 
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Point;
     /// assert_eq!(8, Point::new(4, 8).y());
@@ -31,7 +31,7 @@ impl<T: Axis> Point<T> {
 }
 
 impl<T: Axis> Coord<T> for Point<T> {
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Point;
     /// use coord::Coord;

@@ -14,7 +14,7 @@ impl<T: Axis> Vector<T> {
         Self { x, y }
     }
 
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Vector;
     /// assert_eq!(3, Vector::new(3, 4).x());
@@ -23,7 +23,7 @@ impl<T: Axis> Vector<T> {
         self.x
     }
 
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Vector;
     /// assert_eq!(4, Vector::new(3, 4).y());
@@ -34,7 +34,7 @@ impl<T: Axis> Vector<T> {
 }
 
 impl<T: Axis> Coord<T> for Vector<T> {
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Vector;
     /// use coord::Coord;
@@ -56,7 +56,7 @@ impl<T: Axis> Coord<T> for Vector<T> {
 impl<U: Axis, T: Axis + Add<U, Output = impl Axis>> Add<Vector<U>> for Vector<T> {
     type Output = Vector<<T as Add<U>>::Output>;
 
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Vector;
     /// assert_eq!(Vector::new(10, 15), Vector::new(3, 9) + Vector::new(7, 6));
@@ -69,7 +69,7 @@ impl<U: Axis, T: Axis + Add<U, Output = impl Axis>> Add<Vector<U>> for Vector<T>
 impl<T: Axis + Neg<Output = impl Axis>> Neg for Vector<T> {
     type Output = Vector<<T as Neg>::Output>;
 
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Vector;
     /// assert_eq!(Vector::new(-5, -9), -Vector::new(5, 9));
@@ -82,7 +82,7 @@ impl<T: Axis + Neg<Output = impl Axis>> Neg for Vector<T> {
 impl<U: Axis, T: Axis + Sub<U, Output = impl Axis>> Sub<Vector<U>> for Vector<T> {
     type Output = Vector<<T as Sub<U>>::Output>;
 
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Vector;
     /// assert_eq!(Vector::new(3, 9), Vector::new(10, 15) - Vector::new(7, 6));
@@ -95,7 +95,7 @@ impl<U: Axis, T: Axis + Sub<U, Output = impl Axis>> Sub<Vector<U>> for Vector<T>
 impl<U: Copy, T: Axis + Mul<U, Output = impl Axis>> Mul<U> for Vector<T> {
     type Output = Vector<<T as Mul<U>>::Output>;
 
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Vector;
     /// assert_eq!(Vector::new(20, 30), Vector::new(2, 3) * 10);
@@ -108,7 +108,7 @@ impl<U: Copy, T: Axis + Mul<U, Output = impl Axis>> Mul<U> for Vector<T> {
 impl<U: Copy, T: Axis + Div<U, Output = impl Axis>> Div<U> for Vector<T> {
     type Output = Vector<<T as Div<U>>::Output>;
 
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Vector;
     /// assert_eq!(Vector::new(6, 8), Vector::new(60, 80) / 10);
@@ -119,7 +119,7 @@ impl<U: Copy, T: Axis + Div<U, Output = impl Axis>> Div<U> for Vector<T> {
 }
 
 impl<T: Axis + Zero> Zero for Vector<T> {
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Vector;
     /// use num::Zero;
@@ -129,7 +129,7 @@ impl<T: Axis + Zero> Zero for Vector<T> {
         Self::new(T::zero(), T::zero())
     }
 
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Vector;
     /// use num::Zero;
@@ -141,7 +141,7 @@ impl<T: Axis + Zero> Zero for Vector<T> {
 }
 
 impl<T: Axis + Float + From<f32>> Vector<T> {
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Vector;
     /// assert_eq!(5.0, Vector::new(3.0, 4.0).magnitude());

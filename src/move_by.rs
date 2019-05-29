@@ -12,7 +12,7 @@ impl<T: Axis, U: Axis> MoveBy<U> for Point<T>
 where
     Point<T>: Add<Vector<U>, Output = Point<T>>,
 {
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Point;
     /// use coord::Vector;
@@ -28,7 +28,7 @@ impl<T: Axis, U: Axis> MoveBy<U> for Rect<T>
 where
     Point<T>: MoveBy<U>,
 {
-    /// # Example
+    /// # Examples
     /// ```
     /// use coord::Rect;
     /// use coord::Point;
