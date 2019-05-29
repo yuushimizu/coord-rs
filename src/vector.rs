@@ -140,14 +140,13 @@ impl<T: Axis + Zero> Zero for Vector<T> {
     }
 }
 
-impl<T: Axis + Float + From<f32>> Vector<T> {
+impl<T: Axis + Float + From<f64>> Vector<T> {
     /// # Examples
     /// ```
     /// use coord::Vector;
     /// assert_eq!(5.0, Vector::new(3.0, 4.0).magnitude());
     /// ```
     pub fn magnitude(&self) -> T {
-        let two = From::from(2.0);
-        (self.x().powf(two) + self.y().powf(two)).sqrt()
+        (self.x().powi(2) + self.y().powi(2)).sqrt()
     }
 }
