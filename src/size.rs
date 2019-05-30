@@ -1,14 +1,14 @@
-use crate::coord::{Axis, Coord};
+use crate::coord::{Coord, Value};
 use std::fmt;
 use std::ops::Mul;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
-pub struct Size<T: Axis> {
+pub struct Size<T: Value> {
     width: T,
     height: T,
 }
 
-impl<T: Axis> Size<T> {
+impl<T: Value> Size<T> {
     pub fn new(width: T, height: T) -> Self {
         Self { width, height }
     }
@@ -44,7 +44,7 @@ impl<T: Axis> Size<T> {
     }
 }
 
-impl<T: Axis> Coord<T> for Size<T> {
+impl<T: Value> Coord<T> for Size<T> {
     /// # Examples
     /// ```
     /// use coord::Size;
@@ -76,7 +76,7 @@ impl<T: Axis> Coord<T> for Size<T> {
     }
 }
 
-impl<T: Axis + fmt::Display> fmt::Display for Size<T> {
+impl<T: Value + fmt::Display> fmt::Display for Size<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "({}, {})", self.width(), self.height())
     }

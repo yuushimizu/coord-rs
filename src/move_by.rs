@@ -1,14 +1,14 @@
-use crate::coord::Axis;
+use crate::coord::Value;
 use crate::point::Point;
 use crate::rect::Rect;
 use crate::vector::Vector;
 use std::ops::Add;
 
-pub trait MoveBy<T: Axis> {
+pub trait MoveBy<T: Value> {
     fn move_by(self, vector: Vector<T>) -> Self;
 }
 
-impl<T: Axis, U: Axis> MoveBy<U> for Point<T>
+impl<T: Value, U: Value> MoveBy<U> for Point<T>
 where
     Point<T>: Add<Vector<U>, Output = Point<T>>,
 {
@@ -24,7 +24,7 @@ where
     }
 }
 
-impl<T: Axis, U: Axis> MoveBy<U> for Rect<T>
+impl<T: Value, U: Value> MoveBy<U> for Rect<T>
 where
     Point<T>: MoveBy<U>,
 {

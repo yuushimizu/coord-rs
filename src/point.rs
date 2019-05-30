@@ -1,14 +1,14 @@
-use crate::coord::{Axis, Coord};
+use crate::coord::{Coord, Value};
 use num;
 use std::fmt;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
-pub struct Point<T: Axis> {
+pub struct Point<T: Value> {
     x: T,
     y: T,
 }
 
-impl<T: Axis> Point<T> {
+impl<T: Value> Point<T> {
     pub fn new(x: T, y: T) -> Self {
         Self { x, y }
     }
@@ -56,7 +56,7 @@ impl<T: Axis> Point<T> {
     }
 }
 
-impl<T: Axis> Coord<T> for Point<T> {
+impl<T: Value> Coord<T> for Point<T> {
     /// # Examples
     /// ```
     /// use coord::Point;
@@ -76,7 +76,7 @@ impl<T: Axis> Coord<T> for Point<T> {
     }
 }
 
-impl<T: Axis + fmt::Display> fmt::Display for Point<T> {
+impl<T: Value + fmt::Display> fmt::Display for Point<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "({}, {})", self.x(), self.y())
     }

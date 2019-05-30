@@ -1,15 +1,15 @@
-use crate::coord::Axis;
+use crate::coord::Value;
 use crate::map::Map;
 use crate::rect::Rect;
 use crate::size::Size;
 use crate::vector::Vector;
 use std::ops::Add;
 
-pub trait ExpandBy<T: Axis> {
+pub trait ExpandBy<T: Value> {
     fn expand_by(self, vector: Vector<T>) -> Self;
 }
 
-impl<U: Axis, T: Axis + Add<U, Output = T>> ExpandBy<U> for Size<T> {
+impl<U: Value, T: Value + Add<U, Output = T>> ExpandBy<U> for Size<T> {
     /// # Examples
     /// ```
     /// use coord::Size;
@@ -22,7 +22,7 @@ impl<U: Axis, T: Axis + Add<U, Output = T>> ExpandBy<U> for Size<T> {
     }
 }
 
-impl<T: Axis, U: Axis> ExpandBy<U> for Rect<T>
+impl<T: Value, U: Value> ExpandBy<U> for Rect<T>
 where
     Size<T>: ExpandBy<U>,
 {

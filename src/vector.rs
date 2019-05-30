@@ -1,16 +1,16 @@
-use crate::coord::{Axis, Coord};
+use crate::coord::{Coord, Value};
 use crate::map::Map;
 use num;
 use std::fmt;
 use std::ops::{Add, Div, Mul, Neg, Sub};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
-pub struct Vector<T: Axis> {
+pub struct Vector<T: Value> {
     x: T,
     y: T,
 }
 
-impl<T: Axis> Vector<T> {
+impl<T: Value> Vector<T> {
     pub fn new(x: T, y: T) -> Self {
         Self { x, y }
     }
@@ -46,7 +46,7 @@ impl<T: Axis> Vector<T> {
     }
 }
 
-impl<T: Axis> Coord<T> for Vector<T> {
+impl<T: Value> Coord<T> for Vector<T> {
     /// # Examples
     /// ```
     /// use coord::Vector;
@@ -66,13 +66,13 @@ impl<T: Axis> Coord<T> for Vector<T> {
     }
 }
 
-impl<T: Axis + fmt::Display> fmt::Display for Vector<T> {
+impl<T: Value + fmt::Display> fmt::Display for Vector<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "({}, {})", self.x(), self.y())
     }
 }
 
-impl<U: Axis, T: Axis + Add<U, Output = impl Axis>> Add<Vector<U>> for Vector<T> {
+impl<U: Value, T: Value + Add<U, Output = impl Value>> Add<Vector<U>> for Vector<T> {
     type Output = Vector<<T as Add<U>>::Output>;
 
     /// # Examples
@@ -85,7 +85,7 @@ impl<U: Axis, T: Axis + Add<U, Output = impl Axis>> Add<Vector<U>> for Vector<T>
     }
 }
 
-impl<T: Axis + Neg<Output = impl Axis>> Neg for Vector<T> {
+impl<T: Value + Neg<Output = impl Value>> Neg for Vector<T> {
     type Output = Vector<<T as Neg>::Output>;
 
     /// # Examples
@@ -98,7 +98,7 @@ impl<T: Axis + Neg<Output = impl Axis>> Neg for Vector<T> {
     }
 }
 
-impl<U: Axis, T: Axis + Sub<U, Output = impl Axis>> Sub<Vector<U>> for Vector<T> {
+impl<U: Value, T: Value + Sub<U, Output = impl Value>> Sub<Vector<U>> for Vector<T> {
     type Output = Vector<<T as Sub<U>>::Output>;
 
     /// # Examples
@@ -111,7 +111,7 @@ impl<U: Axis, T: Axis + Sub<U, Output = impl Axis>> Sub<Vector<U>> for Vector<T>
     }
 }
 
-impl<U: Copy, T: Axis + Mul<U, Output = impl Axis>> Mul<U> for Vector<T> {
+impl<U: Copy, T: Value + Mul<U, Output = impl Value>> Mul<U> for Vector<T> {
     type Output = Vector<<T as Mul<U>>::Output>;
 
     /// # Examples
@@ -124,7 +124,7 @@ impl<U: Copy, T: Axis + Mul<U, Output = impl Axis>> Mul<U> for Vector<T> {
     }
 }
 
-impl<U: Copy, T: Axis + Div<U, Output = impl Axis>> Div<U> for Vector<T> {
+impl<U: Copy, T: Value + Div<U, Output = impl Value>> Div<U> for Vector<T> {
     type Output = Vector<<T as Div<U>>::Output>;
 
     /// # Examples
@@ -137,7 +137,7 @@ impl<U: Copy, T: Axis + Div<U, Output = impl Axis>> Div<U> for Vector<T> {
     }
 }
 
-impl<T: Axis + num::Zero> num::Zero for Vector<T> {
+impl<T: Value + num::Zero> num::Zero for Vector<T> {
     /// # Examples
     /// ```
     /// use coord::Vector;

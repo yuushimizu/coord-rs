@@ -1,16 +1,16 @@
-use crate::coord::{Axis, Coord};
+use crate::coord::{Coord, Value};
 use crate::point::Point;
 use crate::size::Size;
 use std::fmt;
 use std::ops::Add;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
-pub struct Rect<T: Axis> {
+pub struct Rect<T: Value> {
     origin: Point<T>,
     size: Size<T>,
 }
 
-impl<T: Axis> Rect<T> {
+impl<T: Value> Rect<T> {
     pub fn new(origin: Point<T>, size: Size<T>) -> Self {
         Self { origin, size }
     }
@@ -70,9 +70,9 @@ impl<T: Axis> Rect<T> {
     }
 }
 
-pub type RectAxis<T> = (T, T);
+pub type RectAxisValue<T> = (T, T);
 
-impl<T: Axis> Coord<(T, T)> for Rect<T> {
+impl<T: Value> Coord<(T, T)> for Rect<T> {
     /// # Examples
     /// ```
     /// use coord::Rect;
@@ -81,7 +81,10 @@ impl<T: Axis> Coord<(T, T)> for Rect<T> {
     /// use coord::Coord;
     /// assert_eq!(Rect::new(Point::new(3, 4), Size::new(10, 20)), Rect::from_x_y((3, 10), (4, 20)));
     /// ```
-    fn from_x_y((x_origin, x_size): RectAxis<T>, (y_origin, y_size): RectAxis<T>) -> Self {
+    fn from_x_y(
+        (x_origin, x_size): RectAxisValue<T>,
+        (y_origin, y_size): RectAxisValue<T>,
+    ) -> Self {
         Self::new(Point::new(x_origin, y_origin), Size::new(x_size, y_size))
     }
 
@@ -93,7 +96,7 @@ impl<T: Axis> Coord<(T, T)> for Rect<T> {
     /// use coord::Coord;
     /// assert_eq!((1, 5), Rect::new(Point::new(1, 2), Size::new(5, 6)).x());
     /// ```
-    fn x(&self) -> RectAxis<T> {
+    fn x(&self) -> RectAxisValue<T> {
         (self.origin().x(), self.size().x())
     }
 
@@ -105,12 +108,12 @@ impl<T: Axis> Coord<(T, T)> for Rect<T> {
     /// use coord::Coord;
     /// assert_eq!((2, 6), Rect::new(Point::new(1, 2), Size::new(5, 6)).y());
     /// ```
-    fn y(&self) -> RectAxis<T> {
+    fn y(&self) -> RectAxisValue<T> {
         (self.origin().y(), self.size().y())
     }
 }
 
-impl<T: Axis + fmt::Display> fmt::Display for Rect<T> {
+impl<T: Value + fmt::Display> fmt::Display for Rect<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "({}, {})", self.origin(), self.size())
     }

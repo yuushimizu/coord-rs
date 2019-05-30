@@ -1,6 +1,6 @@
-use crate::coord::{Axis, Coord};
+use crate::coord::{Coord, Value};
 
-impl<T: Axis, C: Coord<T>> Coord<(T,)> for (C,) {
+impl<T: Value, C: Coord<T>> Coord<(T,)> for (C,) {
     fn from_x_y(x: (T,), y: (T,)) -> Self {
         (C::from_x_y(x.0, y.0),)
     }
@@ -26,7 +26,7 @@ impl<T: Axis, C: Coord<T>> Coord<(T,)> for (C,) {
     }
 }
 
-impl<T0: Axis, T1: Axis, C0: Coord<T0>, C1: Coord<T1>> Coord<(T0, T1)> for (C0, C1) {
+impl<T0: Value, T1: Value, C0: Coord<T0>, C1: Coord<T1>> Coord<(T0, T1)> for (C0, C1) {
     fn from_x_y(x: (T0, T1), y: (T0, T1)) -> Self {
         (C0::from_x_y(x.0, y.0), C1::from_x_y(x.1, y.1))
     }
@@ -40,8 +40,8 @@ impl<T0: Axis, T1: Axis, C0: Coord<T0>, C1: Coord<T1>> Coord<(T0, T1)> for (C0, 
     }
 }
 
-impl<T0: Axis, T1: Axis, T2: Axis, C0: Coord<T0>, C1: Coord<T1>, C2: Coord<T2>> Coord<(T0, T1, T2)>
-    for (C0, C1, C2)
+impl<T0: Value, T1: Value, T2: Value, C0: Coord<T0>, C1: Coord<T1>, C2: Coord<T2>>
+    Coord<(T0, T1, T2)> for (C0, C1, C2)
 {
     fn from_x_y(x: (T0, T1, T2), y: (T0, T1, T2)) -> Self {
         (

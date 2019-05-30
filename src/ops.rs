@@ -1,11 +1,11 @@
-use crate::coord::Axis;
+use crate::coord::Value;
 use crate::map::Map;
 use crate::point::Point;
 use crate::size::Size;
 use crate::vector::Vector;
 use std::ops::{Add, Sub};
 
-impl<U: Axis, T: Axis + Add<U, Output = impl Axis>> Add<Vector<U>> for Point<T> {
+impl<U: Value, T: Value + Add<U, Output = impl Value>> Add<Vector<U>> for Point<T> {
     type Output = Point<<T as Add<U>>::Output>;
 
     /// # Examples
@@ -19,7 +19,7 @@ impl<U: Axis, T: Axis + Add<U, Output = impl Axis>> Add<Vector<U>> for Point<T> 
     }
 }
 
-impl<U: Axis, T: Axis + Sub<U, Output = impl Axis>> Sub<Vector<U>> for Point<T> {
+impl<U: Value, T: Value + Sub<U, Output = impl Value>> Sub<Vector<U>> for Point<T> {
     type Output = Point<<T as Sub<U>>::Output>;
 
     /// # Examples
@@ -33,7 +33,7 @@ impl<U: Axis, T: Axis + Sub<U, Output = impl Axis>> Sub<Vector<U>> for Point<T> 
     }
 }
 
-impl<U: Axis, T: Axis + Sub<U, Output = impl Axis>> Sub<Point<U>> for Point<T> {
+impl<U: Value, T: Value + Sub<U, Output = impl Value>> Sub<Point<U>> for Point<T> {
     type Output = Vector<<T as Sub<U>>::Output>;
 
     /// # Examples
@@ -47,7 +47,7 @@ impl<U: Axis, T: Axis + Sub<U, Output = impl Axis>> Sub<Point<U>> for Point<T> {
     }
 }
 
-impl<U: Axis, T: Axis + Add<U, Output = impl Axis>> Add<Size<U>> for Point<T> {
+impl<U: Value, T: Value + Add<U, Output = impl Value>> Add<Size<U>> for Point<T> {
     type Output = Point<<T as Add<U>>::Output>;
 
     /// # Examples
@@ -61,7 +61,7 @@ impl<U: Axis, T: Axis + Add<U, Output = impl Axis>> Add<Size<U>> for Point<T> {
     }
 }
 
-impl<U: Axis, T: Axis + Sub<U, Output = impl Axis>> Sub<Size<U>> for Point<T> {
+impl<U: Value, T: Value + Sub<U, Output = impl Value>> Sub<Size<U>> for Point<T> {
     type Output = Point<<T as Sub<U>>::Output>;
 
     /// # Examples

@@ -1,21 +1,15 @@
-use crate::coord::Axis;
+use crate::coord::Value;
 use crate::point::Point;
 use crate::rect::Rect;
 use crate::size::Size;
 use crate::vector::Vector;
 use num;
 
-pub trait StepAxis:
-    Clone + num::Zero + num::One + num::ToPrimitive + PartialOrd + num::CheckedAdd
-{
-}
+trait Step: Clone + num::Zero + num::One + num::ToPrimitive + PartialOrd + num::CheckedAdd {}
 
-impl<T: Clone + num::Zero + num::One + num::ToPrimitive + PartialOrd + num::CheckedAdd> StepAxis
-    for T
-{
-}
+impl<T: Clone + num::Zero + num::One + num::ToPrimitive + PartialOrd + num::CheckedAdd> Step for T {}
 
-impl<T: Axis + StepAxis> Size<T> {
+impl<T: Value + Step> Size<T> {
     fn points_step_by<R: Iterator<Item = T>>(
         &self,
         origin: Point<T>,
@@ -97,7 +91,7 @@ impl<T: Axis + StepAxis> Size<T> {
     }
 }
 
-impl<T: Axis + StepAxis> Rect<T> {
+impl<T: Value + Step> Rect<T> {
     /// # Examples
     /// ```
     /// use coord::Rect;
