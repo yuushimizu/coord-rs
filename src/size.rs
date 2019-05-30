@@ -1,4 +1,5 @@
 use crate::coord::{Axis, Coord};
+use std::fmt;
 use std::ops::Mul;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
@@ -60,6 +61,12 @@ impl<T: Axis> Coord<T> for Size<T> {
     /// ```
     fn y(&self) -> T {
         self.height()
+    }
+}
+
+impl<T: Axis + fmt::Display> fmt::Display for Size<T> {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "({}, {})", self.width(), self.height())
     }
 }
 

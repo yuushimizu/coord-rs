@@ -1,6 +1,7 @@
 use crate::coord::{Axis, Coord};
 use crate::map::Map;
 use num::{Float, Zero};
+use std::fmt;
 use std::ops::{Add, Div, Mul, Neg, Sub};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
@@ -50,6 +51,12 @@ impl<T: Axis> Coord<T> for Vector<T> {
 
     fn y(&self) -> T {
         self.y()
+    }
+}
+
+impl<T: Axis + fmt::Display> fmt::Display for Vector<T> {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "({}, {})", self.x(), self.y())
     }
 }
 

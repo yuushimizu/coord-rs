@@ -1,4 +1,6 @@
 use crate::coord::{Axis, Coord};
+use num::Zero;
+use std::fmt;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct Point<T: Axis> {
@@ -28,6 +30,32 @@ impl<T: Axis> Point<T> {
     pub fn y(&self) -> T {
         self.y
     }
+
+    /// # Examples
+    /// ```
+    /// use coord::Point;
+    /// use num::Zero;
+    /// assert_eq!(Point::new(0, 0), Point::zero());
+    /// ```
+    pub fn zero() -> Self
+    where
+        T: Zero,
+    {
+        Self::new(T::zero(), T::zero())
+    }
+
+    /// # Examples
+    /// ```
+    /// use coord::Point;
+    /// use num::Zero;
+    /// assert!(Point::new(0, 0).is_zero());
+    /// ```
+    pub fn is_zero(&self) -> bool
+    where
+        T: Zero,
+    {
+        self.x().is_zero() && self.y().is_zero()
+    }
 }
 
 impl<T: Axis> Coord<T> for Point<T> {
@@ -47,5 +75,11 @@ impl<T: Axis> Coord<T> for Point<T> {
 
     fn y(&self) -> T {
         self.y()
+    }
+}
+
+impl<T: Axis + fmt::Display> fmt::Display for Point<T> {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "({}, {})", self.x(), self.y())
     }
 }
