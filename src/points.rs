@@ -5,7 +5,7 @@ use crate::size::Size;
 use crate::vector::Vector;
 use num;
 
-trait Step: Clone + num::Zero + num::One + num::ToPrimitive + PartialOrd + num::CheckedAdd {}
+pub trait Step: Clone + num::Zero + num::One + num::ToPrimitive + PartialOrd + num::CheckedAdd {}
 
 impl<T: Clone + num::Zero + num::One + num::ToPrimitive + PartialOrd + num::CheckedAdd> Step for T {}
 

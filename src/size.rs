@@ -44,7 +44,9 @@ impl<T: Value> Size<T> {
     }
 }
 
-impl<T: Value> Coord<T> for Size<T> {
+impl<T: Value> Coord for Size<T> {
+    type Item = T;
+
     /// # Examples
     /// ```
     /// use coord::Size;

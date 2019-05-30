@@ -46,7 +46,9 @@ impl<T: Value> Vector<T> {
     }
 }
 
-impl<T: Value> Coord<T> for Vector<T> {
+impl<T: Value> Coord for Vector<T> {
+    type Item = T;
+
     /// # Examples
     /// ```
     /// use coord::Vector;

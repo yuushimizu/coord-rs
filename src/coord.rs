@@ -2,10 +2,12 @@ pub trait Value: Copy {}
 
 impl<T: Copy> Value for T {}
 
-pub trait Coord<T: Value>: Copy {
-    fn from_x_y(x: T, y: T) -> Self;
+pub trait Coord: Copy {
+    type Item: Value;
 
-    fn x(&self) -> T;
+    fn from_x_y(x: Self::Item, y: Self::Item) -> Self;
 
-    fn y(&self) -> T;
+    fn x(&self) -> Self::Item;
+
+    fn y(&self) -> Self::Item;
 }

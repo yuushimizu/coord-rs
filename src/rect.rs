@@ -70,9 +70,9 @@ impl<T: Value> Rect<T> {
     }
 }
 
-pub type RectAxisValue<T> = (T, T);
+impl<T: Value> Coord for Rect<T> {
+    type Item = (T, T);
 
-impl<T: Value> Coord<(T, T)> for Rect<T> {
     /// # Examples
     /// ```
     /// use coord::Rect;
@@ -81,10 +81,7 @@ impl<T: Value> Coord<(T, T)> for Rect<T> {
     /// use coord::Coord;
     /// assert_eq!(Rect::new(Point::new(3, 4), Size::new(10, 20)), Rect::from_x_y((3, 10), (4, 20)));
     /// ```
-    fn from_x_y(
-        (x_origin, x_size): RectAxisValue<T>,
-        (y_origin, y_size): RectAxisValue<T>,
-    ) -> Self {
+    fn from_x_y((x_origin, x_size): (T, T), (y_origin, y_size): (T, T)) -> Self {
         Self::new(Point::new(x_origin, y_origin), Size::new(x_size, y_size))
     }
 
@@ -96,7 +93,7 @@ impl<T: Value> Coord<(T, T)> for Rect<T> {
     /// use coord::Coord;
     /// assert_eq!((1, 5), Rect::new(Point::new(1, 2), Size::new(5, 6)).x());
     /// ```
-    fn x(&self) -> RectAxisValue<T> {
+    fn x(&self) -> (T, T) {
         (self.origin().x(), self.size().x())
     }
 
@@ -108,7 +105,7 @@ impl<T: Value> Coord<(T, T)> for Rect<T> {
     /// use coord::Coord;
     /// assert_eq!((2, 6), Rect::new(Point::new(1, 2), Size::new(5, 6)).y());
     /// ```
-    fn y(&self) -> RectAxisValue<T> {
+    fn y(&self) -> (T, T) {
         (self.origin().y(), self.size().y())
     }
 }

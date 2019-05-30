@@ -1,8 +1,10 @@
-use crate::coord::{Coord, Value};
+use crate::coord::Coord;
 
-impl<T: Value, C: Coord<T>> Coord<(T,)> for (C,) {
-    fn from_x_y(x: (T,), y: (T,)) -> Self {
-        (C::from_x_y(x.0, y.0),)
+impl<C: Coord> Coord for (C,) {
+    type Item = (<C as Coord>::Item,);
+
+    fn from_x_y(x: Self::Item, y: Self::Item) -> Self {
+        (<C as Coord>::from_x_y(x.0, y.0),)
     }
 
     /// # Examples
@@ -11,7 +13,7 @@ impl<T: Value, C: Coord<T>> Coord<(T,)> for (C,) {
     /// use coord::Point;
     /// assert_eq!((10,), (Point::new(10, 20),).x());
     /// ```
-    fn x(&self) -> (T,) {
+    fn x(&self) -> Self::Item {
         (self.0.x(),)
     }
 
@@ -21,29 +23,35 @@ impl<T: Value, C: Coord<T>> Coord<(T,)> for (C,) {
     /// use coord::Point;
     /// assert_eq!((20,), (Point::new(10, 20),).y());
     /// ```
-    fn y(&self) -> (T,) {
+    fn y(&self) -> Self::Item {
         (self.0.y(),)
     }
 }
 
-impl<T0: Value, T1: Value, C0: Coord<T0>, C1: Coord<T1>> Coord<(T0, T1)> for (C0, C1) {
-    fn from_x_y(x: (T0, T1), y: (T0, T1)) -> Self {
+impl<C0: Coord, C1: Coord> Coord for (C0, C1) {
+    type Item = (<C0 as Coord>::Item, <C1 as Coord>::Item);
+
+    fn from_x_y(x: Self::Item, y: Self::Item) -> Self {
         (C0::from_x_y(x.0, y.0), C1::from_x_y(x.1, y.1))
     }
 
-    fn x(&self) -> (T0, T1) {
+    fn x(&self) -> Self::Item {
         (self.0.x(), self.1.x())
     }
 
-    fn y(&self) -> (T0, T1) {
+    fn y(&self) -> Self::Item {
         (self.0.y(), self.1.y())
     }
 }
 
-impl<T0: Value, T1: Value, T2: Value, C0: Coord<T0>, C1: Coord<T1>, C2: Coord<T2>>
-    Coord<(T0, T1, T2)> for (C0, C1, C2)
-{
-    fn from_x_y(x: (T0, T1, T2), y: (T0, T1, T2)) -> Self {
+impl<C0: Coord, C1: Coord, C2: Coord> Coord for (C0, C1, C2) {
+    type Item = (
+        <C0 as Coord>::Item,
+        <C1 as Coord>::Item,
+        <C2 as Coord>::Item,
+    );
+
+    fn from_x_y(x: Self::Item, y: Self::Item) -> Self {
         (
             C0::from_x_y(x.0, y.0),
             C1::from_x_y(x.1, y.1),
@@ -51,11 +59,11 @@ impl<T0: Value, T1: Value, T2: Value, C0: Coord<T0>, C1: Coord<T1>, C2: Coord<T2
         )
     }
 
-    fn x(&self) -> (T0, T1, T2) {
+    fn x(&self) -> Self::Item {
         (self.0.x(), self.1.x(), self.2.x())
     }
 
-    fn y(&self) -> (T0, T1, T2) {
+    fn y(&self) -> Self::Item {
         (self.0.y(), self.1.y(), self.2.y())
     }
 }

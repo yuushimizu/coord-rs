@@ -56,7 +56,9 @@ impl<T: Value> Point<T> {
     }
 }
 
-impl<T: Value> Coord<T> for Point<T> {
+impl<T: Value> Coord for Point<T> {
+    type Item = T;
+
     /// # Examples
     /// ```
     /// use coord::Point;
