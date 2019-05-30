@@ -1,4 +1,5 @@
 pub mod angle;
+pub mod axis;
 pub mod coord;
 pub mod expand_by;
 pub mod map;
@@ -14,6 +15,8 @@ pub mod vector;
 pub mod prelude {
     pub use crate::angle::Angle;
     pub use crate::angle::AngleComponent;
+    pub use crate::axis::Axis;
+    pub use crate::axis::AxisKeyed;
     pub use crate::coord::Coord;
     pub use crate::expand_by::ExpandBy;
     pub use crate::map::Map;
