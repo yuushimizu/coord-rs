@@ -9,6 +9,7 @@ pub mod point;
 pub mod points;
 pub mod rect;
 pub mod size;
+pub mod transpose;
 pub mod tuple;
 pub mod vector;
 
@@ -24,6 +25,7 @@ pub mod prelude {
     pub use crate::point::Point;
     pub use crate::rect::Rect;
     pub use crate::size::Size;
+    pub use crate::transpose::Transpose;
     pub use crate::vector::Vector;
 }
 
