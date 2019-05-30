@@ -30,6 +30,18 @@ impl<T: Axis> Size<T> {
     pub fn height(&self) -> T {
         self.height
     }
+
+    /// # Examples
+    /// ```
+    /// use coord::Size;
+    /// assert_eq!(12, Size::new(3, 4).area());
+    /// ```
+    pub fn area(&self) -> <T as Mul<T>>::Output
+    where
+        T: Mul<T>,
+    {
+        self.width() * self.height()
+    }
 }
 
 impl<T: Axis> Coord<T> for Size<T> {
@@ -67,16 +79,5 @@ impl<T: Axis> Coord<T> for Size<T> {
 impl<T: Axis + fmt::Display> fmt::Display for Size<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "({}, {})", self.width(), self.height())
-    }
-}
-
-impl<T: Axis + Mul<T>> Size<T> {
-    /// # Examples
-    /// ```
-    /// use coord::Size;
-    /// assert_eq!(12, Size::new(3, 4).area());
-    /// ```
-    pub fn area(&self) -> <T as Mul<T>>::Output {
-        self.width() * self.height()
     }
 }

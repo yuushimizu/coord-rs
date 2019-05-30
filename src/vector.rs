@@ -32,6 +32,18 @@ impl<T: Axis> Vector<T> {
     pub fn y(&self) -> T {
         self.y
     }
+
+    /// # Examples
+    /// ```
+    /// use coord::Vector;
+    /// assert_eq!(5.0, Vector::new(3.0, 4.0).magnitude());
+    /// ```
+    pub fn magnitude(&self) -> T
+    where
+        T: num::Float,
+    {
+        (self.x().powi(2) + self.y().powi(2)).sqrt()
+    }
 }
 
 impl<T: Axis> Coord<T> for Vector<T> {
@@ -144,16 +156,5 @@ impl<T: Axis + num::Zero> num::Zero for Vector<T> {
     /// ```
     fn is_zero(&self) -> bool {
         self.x().is_zero() && self.y().is_zero()
-    }
-}
-
-impl<T: Axis + num::Float> Vector<T> {
-    /// # Examples
-    /// ```
-    /// use coord::Vector;
-    /// assert_eq!(5.0, Vector::new(3.0, 4.0).magnitude());
-    /// ```
-    pub fn magnitude(&self) -> T {
-        (self.x().powi(2) + self.y().powi(2)).sqrt()
     }
 }
