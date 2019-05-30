@@ -3,11 +3,17 @@ use crate::point::Point;
 use crate::rect::Rect;
 use crate::size::Size;
 use crate::vector::Vector;
-use num::{range_step, range_step_inclusive, CheckedAdd, One, ToPrimitive, Zero};
+use num;
 
-pub trait StepAxis: Clone + Zero + One + ToPrimitive + PartialOrd + CheckedAdd {}
+pub trait StepAxis:
+    Clone + num::Zero + num::One + num::ToPrimitive + PartialOrd + num::CheckedAdd
+{
+}
 
-impl<T: Clone + Zero + One + ToPrimitive + PartialOrd + CheckedAdd> StepAxis for T {}
+impl<T: Clone + num::Zero + num::One + num::ToPrimitive + PartialOrd + num::CheckedAdd> StepAxis
+    for T
+{
+}
 
 impl<T: Axis + StepAxis> Size<T> {
     fn points_step_by<R: Iterator<Item = T>>(
@@ -35,7 +41,7 @@ impl<T: Axis + StepAxis> Size<T> {
     ///     Size::new(6, 2).points_step(Point::new(3, 2), Vector::new(2, 1)).collect::<Vec<_>>());
     /// ```
     pub fn points_step(&self, origin: Point<T>, step: Vector<T>) -> impl Iterator<Item = Point<T>> {
-        self.points_step_by(origin, step, range_step)
+        self.points_step_by(origin, step, num::range_step)
     }
 
     /// # Examples
@@ -71,7 +77,7 @@ impl<T: Axis + StepAxis> Size<T> {
         origin: Point<T>,
         step: Vector<T>,
     ) -> impl Iterator<Item = Point<T>> {
-        self.points_step_by(origin, step, range_step_inclusive)
+        self.points_step_by(origin, step, num::range_step_inclusive)
     }
 
     /// # Examples

@@ -1,6 +1,6 @@
 use crate::coord::{Axis, Coord};
 use crate::map::Map;
-use num::{Float, Zero};
+use num;
 use std::fmt;
 use std::ops::{Add, Div, Mul, Neg, Sub};
 
@@ -125,7 +125,7 @@ impl<U: Copy, T: Axis + Div<U, Output = impl Axis>> Div<U> for Vector<T> {
     }
 }
 
-impl<T: Axis + Zero> Zero for Vector<T> {
+impl<T: Axis + num::Zero> num::Zero for Vector<T> {
     /// # Examples
     /// ```
     /// use coord::Vector;
@@ -147,7 +147,7 @@ impl<T: Axis + Zero> Zero for Vector<T> {
     }
 }
 
-impl<T: Axis + Float> Vector<T> {
+impl<T: Axis + num::Float> Vector<T> {
     /// # Examples
     /// ```
     /// use coord::Vector;

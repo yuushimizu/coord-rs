@@ -1,7 +1,7 @@
-use num::Float;
+use num;
 use std::ops::{Add, Div, Mul, Neg, Rem, Sub};
 
-pub trait AngleComponent: Float {
+pub trait AngleComponent: num::Float {
     fn pi() -> Self;
 
     fn double(&self) -> Self;

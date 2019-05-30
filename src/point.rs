@@ -1,5 +1,5 @@
 use crate::coord::{Axis, Coord};
-use num::Zero;
+use num;
 use std::fmt;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
@@ -34,12 +34,11 @@ impl<T: Axis> Point<T> {
     /// # Examples
     /// ```
     /// use coord::Point;
-    /// use num::Zero;
     /// assert_eq!(Point::new(0, 0), Point::zero());
     /// ```
     pub fn zero() -> Self
     where
-        T: Zero,
+        T: num::Zero,
     {
         Self::new(T::zero(), T::zero())
     }
@@ -47,12 +46,11 @@ impl<T: Axis> Point<T> {
     /// # Examples
     /// ```
     /// use coord::Point;
-    /// use num::Zero;
     /// assert!(Point::new(0, 0).is_zero());
     /// ```
     pub fn is_zero(&self) -> bool
     where
-        T: Zero,
+        T: num::Zero,
     {
         self.x().is_zero() && self.y().is_zero()
     }
