@@ -5,7 +5,10 @@ use crate::size::Size;
 use crate::vector::Vector;
 use num;
 
-pub trait Step: Clone + num::Zero + num::One + num::ToPrimitive + PartialOrd + num::CheckedAdd {}
+pub trait Step:
+    Clone + num::Zero + num::One + num::ToPrimitive + PartialOrd + num::CheckedAdd
+{
+}
 
 impl<T: Clone + num::Zero + num::One + num::ToPrimitive + PartialOrd + num::CheckedAdd> Step for T {}
 
@@ -14,7 +17,7 @@ impl<T: Value + Step> Size<T> {
         &self,
         origin: Point<T>,
         step: Vector<T>,
-        range_step: impl Fn(T, T, T) -> R,
+        range_step: fn(T, T, T) -> R,
     ) -> impl Iterator<Item = Point<T>> {
         let stop_x = origin.x() + self.width();
         range_step(origin.y(), origin.y() + self.height(), step.y()).flat_map(move |y| {
