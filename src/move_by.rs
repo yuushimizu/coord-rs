@@ -14,9 +14,9 @@ where
 {
     /// # Examples
     /// ```
-    /// use coord::Point;
-    /// use coord::Vector;
-    /// use coord::MoveBy;
+    /// # use coord::Point;
+    /// # use coord::Vector;
+    /// # use coord::MoveBy;
     /// assert_eq!(Point::new(15, 17), Point::new(5, 7).move_by(Vector::new(10, 10)));
     /// ```
     fn move_by(self, vector: Vector<U>) -> Self {
@@ -30,11 +30,11 @@ where
 {
     /// # Examples
     /// ```
-    /// use coord::Rect;
-    /// use coord::Point;
-    /// use coord::Size;
-    /// use coord::Vector;
-    /// use coord::MoveBy;
+    /// # use coord::Rect;
+    /// # use coord::Point;
+    /// # use coord::Size;
+    /// # use coord::Vector;
+    /// # use coord::MoveBy;
     /// assert_eq!(Rect::new(Point::new(12, 24), Size::new(8, 9)), Rect::new(Point::new(10, 20), Size::new(8, 9)).move_by(Vector::new(2, 4)));
     /// ```
     fn move_by(self, vector: Vector<U>) -> Self {

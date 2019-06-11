@@ -12,9 +12,9 @@ pub trait ExpandBy<T: Value> {
 impl<U: Value, T: Value + Add<U, Output = T>> ExpandBy<U> for Size<T> {
     /// # Examples
     /// ```
-    /// use coord::Size;
-    /// use coord::Vector;
-    /// use coord::ExpandBy;
+    /// # use coord::Size;
+    /// # use coord::Vector;
+    /// # use coord::ExpandBy;
     /// assert_eq!(Size::new(140, 180), Size::new(100, 100).expand_by(Vector::new(40, 80)));
     /// ```
     fn expand_by(self, vector: Vector<U>) -> Self {
@@ -28,11 +28,11 @@ where
 {
     /// # Examples
     /// ```
-    /// use coord::Rect;
-    /// use coord::Point;
-    /// use coord::Size;
-    /// use coord::Vector;
-    /// use coord::ExpandBy;
+    /// # use coord::Rect;
+    /// # use coord::Point;
+    /// # use coord::Size;
+    /// # use coord::Vector;
+    /// # use coord::ExpandBy;
     /// assert_eq!(Rect::new(Point::new(2, 3), Size::new(14, 15)), Rect::new(Point::new(2, 3), Size::new(4, 5)).expand_by(Vector::new(10, 10)));
     /// ```
     fn expand_by(self, vector: Vector<U>) -> Self {

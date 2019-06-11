@@ -15,7 +15,7 @@ impl<T: Value> Point<T> {
 
     /// # Examples
     /// ```
-    /// use coord::Point;
+    /// # use coord::Point;
     /// assert_eq!(4, Point::new(4, 8).x());
     /// ```
     pub fn x(&self) -> T {
@@ -24,7 +24,7 @@ impl<T: Value> Point<T> {
 
     /// # Examples
     /// ```
-    /// use coord::Point;
+    /// # use coord::Point;
     /// assert_eq!(8, Point::new(4, 8).y());
     /// ```
     pub fn y(&self) -> T {
@@ -33,7 +33,7 @@ impl<T: Value> Point<T> {
 
     /// # Examples
     /// ```
-    /// use coord::Point;
+    /// # use coord::Point;
     /// assert_eq!(Point::new(0, 0), Point::zero());
     /// ```
     pub fn zero() -> Self
@@ -45,7 +45,7 @@ impl<T: Value> Point<T> {
 
     /// # Examples
     /// ```
-    /// use coord::Point;
+    /// # use coord::Point;
     /// assert!(Point::new(0, 0).is_zero());
     /// ```
     pub fn is_zero(&self) -> bool
@@ -61,8 +61,8 @@ impl<T: Value> Coord for Point<T> {
 
     /// # Examples
     /// ```
-    /// use coord::Point;
-    /// use coord::Coord;
+    /// # use coord::Point;
+    /// # use coord::Coord;
     /// assert_eq!(Point::new(6, 12), Point::from_x_y(6, 12));
     /// ```
     fn from_x_y(x: T, y: T) -> Self {

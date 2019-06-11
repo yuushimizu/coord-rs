@@ -27,9 +27,9 @@ impl<T: Value + Step> Size<T> {
 
     /// # Examples
     /// ```
-    /// use coord::Size;
-    /// use coord::Point;
-    /// use coord::Vector;
+    /// # use coord::Size;
+    /// # use coord::Point;
+    /// # use coord::Vector;
     /// assert_eq!(
     ///     vec![
     ///         Point::new(3, 2), Point::new(5, 2), Point::new(7, 2),
@@ -43,8 +43,8 @@ impl<T: Value + Step> Size<T> {
 
     /// # Examples
     /// ```
-    /// use coord::Size;
-    /// use coord::Point;
+    /// # use coord::Size;
+    /// # use coord::Point;
     /// assert_eq!(
     ///     vec![
     ///         Point::new(3, 2), Point::new(4, 2), Point::new(5, 2),
@@ -58,9 +58,9 @@ impl<T: Value + Step> Size<T> {
 
     /// # Examples
     /// ```
-    /// use coord::Size;
-    /// use coord::Point;
-    /// use coord::Vector;
+    /// # use coord::Size;
+    /// # use coord::Point;
+    /// # use coord::Vector;
     /// assert_eq!(
     ///     vec![
     ///         Point::new(3, 2), Point::new(5, 2), Point::new(7, 2), Point::new(9, 2),
@@ -79,8 +79,8 @@ impl<T: Value + Step> Size<T> {
 
     /// # Examples
     /// ```
-    /// use coord::Size;
-    /// use coord::Point;
+    /// # use coord::Size;
+    /// # use coord::Point;
     /// assert_eq!(
     ///     vec![
     ///         Point::new(3, 2), Point::new(4, 2), Point::new(5, 2), Point::new(6, 2),
@@ -97,9 +97,9 @@ impl<T: Value + Step> Size<T> {
 impl<T: Value + Step> Rect<T> {
     /// # Examples
     /// ```
-    /// use coord::Rect;
-    /// use coord::Point;
-    /// use coord::Size;
+    /// # use coord::Rect;
+    /// # use coord::Point;
+    /// # use coord::Size;
     /// assert_eq!(
     ///     vec![
     ///         Point::new(10, 20), Point::new(11, 20),

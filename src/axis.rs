@@ -9,7 +9,7 @@ pub enum Axis {
 impl Axis {
     /// # Examples
     /// ```
-    /// use coord::Axis::{X, Y};
+    /// # use coord::Axis::{X, Y};
     /// assert_eq!(Y, X.transpose());
     /// assert_eq!(X, Y.transpose());
     /// ```
@@ -24,9 +24,9 @@ impl Axis {
 pub trait AxisKeyed: Coord {
     /// # Examples
     /// ```
-    /// use coord::Vector;
-    /// use coord::Axis;
-    /// use coord::AxisKeyed;
+    /// # use coord::Vector;
+    /// # use coord::Axis;
+    /// # use coord::AxisKeyed;
     /// let vector = Vector::new(30, 50);
     /// assert_eq!(30, vector.get(Axis::X));
     /// assert_eq!(50, vector.get(Axis::Y));

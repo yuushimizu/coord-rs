@@ -59,7 +59,7 @@ impl<U: AngleComponent, T: AngleComponent + Add<U, Output = impl AngleComponent>
 
     /// # Examples
     /// ```
-    /// use coord::Angle;
+    /// # use coord::Angle;
     /// assert_eq!(Angle::new(3.5), Angle::new(1.2) + Angle::new(2.3));
     /// ```
     fn add(self, rhs: Angle<U>) -> Self::Output {

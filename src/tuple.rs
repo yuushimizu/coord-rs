@@ -9,8 +9,8 @@ impl<C: Coord> Coord for (C,) {
 
     /// # Examples
     /// ```
-    /// use coord::Coord;
-    /// use coord::Point;
+    /// # use coord::Coord;
+    /// # use coord::Point;
     /// assert_eq!((10,), (Point::new(10, 20),).x());
     /// ```
     fn x(&self) -> Self::Item {
@@ -19,8 +19,8 @@ impl<C: Coord> Coord for (C,) {
 
     /// # Examples
     /// ```
-    /// use coord::Coord;
-    /// use coord::Point;
+    /// # use coord::Coord;
+    /// # use coord::Point;
     /// assert_eq!((20,), (Point::new(10, 20),).y());
     /// ```
     fn y(&self) -> Self::Item {

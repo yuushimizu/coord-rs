@@ -17,7 +17,7 @@ impl<T: Value> Vector<T> {
 
     /// # Examples
     /// ```
-    /// use coord::Vector;
+    /// # use coord::Vector;
     /// assert_eq!(3, Vector::new(3, 4).x());
     /// ```
     pub fn x(&self) -> T {
@@ -26,7 +26,7 @@ impl<T: Value> Vector<T> {
 
     /// # Examples
     /// ```
-    /// use coord::Vector;
+    /// # use coord::Vector;
     /// assert_eq!(4, Vector::new(3, 4).y());
     /// ```
     pub fn y(&self) -> T {
@@ -35,7 +35,7 @@ impl<T: Value> Vector<T> {
 
     /// # Examples
     /// ```
-    /// use coord::Vector;
+    /// # use coord::Vector;
     /// assert_eq!(5.0, Vector::new(3.0, 4.0).magnitude());
     /// ```
     pub fn magnitude(&self) -> T
@@ -51,8 +51,8 @@ impl<T: Value> Coord for Vector<T> {
 
     /// # Examples
     /// ```
-    /// use coord::Vector;
-    /// use coord::Coord;
+    /// # use coord::Vector;
+    /// # use coord::Coord;
     /// assert_eq!(Vector::new(10, 20), Vector::from_x_y(10, 20));
     /// ```
     fn from_x_y(x: T, y: T) -> Self {
@@ -79,7 +79,7 @@ impl<U: Value, T: Value + Add<U, Output = impl Value>> Add<Vector<U>> for Vector
 
     /// # Examples
     /// ```
-    /// use coord::Vector;
+    /// # use coord::Vector;
     /// assert_eq!(Vector::new(10, 15), Vector::new(3, 9) + Vector::new(7, 6));
     /// ```
     fn add(self, rhs: Vector<U>) -> Self::Output {
@@ -92,7 +92,7 @@ impl<T: Value + Neg<Output = impl Value>> Neg for Vector<T> {
 
     /// # Examples
     /// ```
-    /// use coord::Vector;
+    /// # use coord::Vector;
     /// assert_eq!(Vector::new(-5, -9), -Vector::new(5, 9));
     /// ```
     fn neg(self) -> Self::Output {
@@ -105,7 +105,7 @@ impl<U: Value, T: Value + Sub<U, Output = impl Value>> Sub<Vector<U>> for Vector
 
     /// # Examples
     /// ```
-    /// use coord::Vector;
+    /// # use coord::Vector;
     /// assert_eq!(Vector::new(3, 9), Vector::new(10, 15) - Vector::new(7, 6));
     /// ```
     fn sub(self, rhs: Vector<U>) -> Self::Output {
@@ -118,7 +118,7 @@ impl<U: Copy, T: Value + Mul<U, Output = impl Value>> Mul<U> for Vector<T> {
 
     /// # Examples
     /// ```
-    /// use coord::Vector;
+    /// # use coord::Vector;
     /// assert_eq!(Vector::new(20, 30), Vector::new(2, 3) * 10);
     /// ```
     fn mul(self, rhs: U) -> Self::Output {
@@ -131,7 +131,7 @@ impl<U: Copy, T: Value + Div<U, Output = impl Value>> Div<U> for Vector<T> {
 
     /// # Examples
     /// ```
-    /// use coord::Vector;
+    /// # use coord::Vector;
     /// assert_eq!(Vector::new(6, 8), Vector::new(60, 80) / 10);
     /// ```
     fn div(self, rhs: U) -> Self::Output {
@@ -142,8 +142,8 @@ impl<U: Copy, T: Value + Div<U, Output = impl Value>> Div<U> for Vector<T> {
 impl<T: Value + num::Zero> num::Zero for Vector<T> {
     /// # Examples
     /// ```
-    /// use coord::Vector;
-    /// use num::Zero;
+    /// # use coord::Vector;
+    /// # use num::Zero;
     /// assert_eq!(Vector::new(0, 0), Vector::zero());
     /// ```
     fn zero() -> Self {
@@ -152,8 +152,8 @@ impl<T: Value + num::Zero> num::Zero for Vector<T> {
 
     /// # Examples
     /// ```
-    /// use coord::Vector;
-    /// use num::Zero;
+    /// # use coord::Vector;
+    /// # use num::Zero;
     /// assert!(Vector::new(0, 0).is_zero());
     /// ```
     fn is_zero(&self) -> bool {

@@ -17,9 +17,9 @@ impl<T: Value> Rect<T> {
 
     /// # Examples
     /// ```
-    /// use coord::Rect;
-    /// use coord::Point;
-    /// use coord::Size;
+    /// # use coord::Rect;
+    /// # use coord::Point;
+    /// # use coord::Size;
     /// assert_eq!(Point::new(4, 5), Rect::new(Point::new(4, 5), Size::new(10, 20)).origin());
     /// ```
     pub fn origin(&self) -> Point<T> {
@@ -28,9 +28,9 @@ impl<T: Value> Rect<T> {
 
     /// # Examples
     /// ```
-    /// use coord::Rect;
-    /// use coord::Point;
-    /// use coord::Size;
+    /// # use coord::Rect;
+    /// # use coord::Point;
+    /// # use coord::Size;
     /// assert_eq!(Size::new(10, 20), Rect::new(Point::new(4, 5), Size::new(10, 20)).size());
     /// ```
     pub fn size(&self) -> Size<T> {
@@ -39,9 +39,9 @@ impl<T: Value> Rect<T> {
 
     /// # Examples
     /// ```
-    /// use coord::Rect;
-    /// use coord::Point;
-    /// use coord::Size;
+    /// # use coord::Rect;
+    /// # use coord::Point;
+    /// # use coord::Size;
     /// assert_eq!(Point::new(13, 24), Rect::new(Point::new(3, 4), Size::new(10, 20)).max());
     /// ```
     pub fn max(&self) -> Point<T>
@@ -53,9 +53,9 @@ impl<T: Value> Rect<T> {
 
     /// # Examples
     /// ```
-    /// use coord::Rect;
-    /// use coord::Point;
-    /// use coord::Size;
+    /// # use coord::Rect;
+    /// # use coord::Point;
+    /// # use coord::Size;
     /// assert!(Rect::new(Point::new(5, 10), Size::new(4, 8)).contains(Point::new(7, 13)))
     /// ```
     pub fn contains(&self, point: Point<T>) -> bool
@@ -75,10 +75,10 @@ impl<T: Value> Coord for Rect<T> {
 
     /// # Examples
     /// ```
-    /// use coord::Rect;
-    /// use coord::Point;
-    /// use coord::Size;
-    /// use coord::Coord;
+    /// # use coord::Rect;
+    /// # use coord::Point;
+    /// # use coord::Size;
+    /// # use coord::Coord;
     /// assert_eq!(Rect::new(Point::new(3, 4), Size::new(10, 20)), Rect::from_x_y((3, 10), (4, 20)));
     /// ```
     fn from_x_y((x_origin, x_size): (T, T), (y_origin, y_size): (T, T)) -> Self {
@@ -87,10 +87,10 @@ impl<T: Value> Coord for Rect<T> {
 
     /// # Examples
     /// ```
-    /// use coord::Rect;
-    /// use coord::Point;
-    /// use coord::Size;
-    /// use coord::Coord;
+    /// # use coord::Rect;
+    /// # use coord::Point;
+    /// # use coord::Size;
+    /// # use coord::Coord;
     /// assert_eq!((1, 5), Rect::new(Point::new(1, 2), Size::new(5, 6)).x());
     /// ```
     fn x(&self) -> (T, T) {
@@ -99,10 +99,10 @@ impl<T: Value> Coord for Rect<T> {
 
     /// # Examples
     /// ```
-    /// use coord::Rect;
-    /// use coord::Point;
-    /// use coord::Size;
-    /// use coord::Coord;
+    /// # use coord::Rect;
+    /// # use coord::Point;
+    /// # use coord::Size;
+    /// # use coord::Coord;
     /// assert_eq!((2, 6), Rect::new(Point::new(1, 2), Size::new(5, 6)).y());
     /// ```
     fn y(&self) -> (T, T) {
