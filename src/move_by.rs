@@ -55,7 +55,7 @@ impl<V: Value, T: MoveBy<V>> MoveBy<V> for (T,) {
     }
 }
 
-impl<V: Value, T1: MoveBy<V>, T2: MoveBy<V>> MoveBy<V> for (T1, T2) {
+impl<V: Value, T0: MoveBy<V>, T1: MoveBy<V>> MoveBy<V> for (T0, T1) {
     /// # Examples
     /// ```
     /// # use coord::Point;
@@ -72,7 +72,7 @@ impl<V: Value, T1: MoveBy<V>, T2: MoveBy<V>> MoveBy<V> for (T1, T2) {
     }
 }
 
-impl<V: Value, T1: MoveBy<V>, T2: MoveBy<V>, T3: MoveBy<V>> MoveBy<V> for (T1, T2, T3) {
+impl<V: Value, T0: MoveBy<V>, T1: MoveBy<V>, T2: MoveBy<V>> MoveBy<V> for (T0, T1, T2) {
     /// # Examples
     /// ```
     /// # use coord::Point;
