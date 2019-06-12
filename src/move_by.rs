@@ -41,3 +41,52 @@ where
         Self::new(self.origin().move_by(vector), self.size())
     }
 }
+
+impl<V: Value, T: MoveBy<V>> MoveBy<V> for (T,) {
+    /// # Examples
+    /// ```
+    /// # use coord::Point;
+    /// # use coord::Vector;
+    /// # use coord::MoveBy;
+    /// assert_eq!((Point::new(15, 27),), (Point::new(5, 7),).move_by(Vector::new(10, 20)));
+    /// ```
+    fn move_by(self, vector: Vector<V>) -> Self {
+        (self.0.move_by(vector),)
+    }
+}
+
+impl<V: Value, T1: MoveBy<V>, T2: MoveBy<V>> MoveBy<V> for (T1, T2) {
+    /// # Examples
+    /// ```
+    /// # use coord::Point;
+    /// # use coord::Size;
+    /// # use coord::Rect;
+    /// # use coord::Vector;
+    /// # use coord::MoveBy;
+    /// assert_eq!(
+    ///     (Point::new(11, 22), Rect::new(Point::new(13, 24), Size::new(5, 6))),
+    ///     (Point::new(1, 2), Rect::new(Point::new(3, 4), Size::new(5, 6))).move_by(Vector::new(10, 20)));
+    /// ```
+    fn move_by(self, vector: Vector<V>) -> Self {
+        (self.0.move_by(vector), self.1.move_by(vector))
+    }
+}
+
+impl<V: Value, T1: MoveBy<V>, T2: MoveBy<V>, T3: MoveBy<V>> MoveBy<V> for (T1, T2, T3) {
+    /// # Examples
+    /// ```
+    /// # use coord::Point;
+    /// # use coord::Vector;
+    /// # use coord::MoveBy;
+    /// assert_eq!(
+    ///     (Point::new(11, 22), Point::new(13, 24), Point::new(15, 26)),
+    ///     (Point::new(1, 2), Point::new(3, 4), Point::new(5, 6)).move_by(Vector::new(10, 20)));
+    /// ```
+    fn move_by(self, vector: Vector<V>) -> Self {
+        (
+            self.0.move_by(vector),
+            self.1.move_by(vector),
+            self.2.move_by(vector),
+        )
+    }
+}
