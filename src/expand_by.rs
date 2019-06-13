@@ -9,7 +9,7 @@ pub trait ExpandBy<T: Value> {
     fn expand_by(self, vector: Vector<T>) -> Self;
 }
 
-impl<U: Value, T: Value + Add<U, Output = T>> ExpandBy<U> for Size<T> {
+impl<V: Value, T: Value + Add<V, Output = T>> ExpandBy<V> for Size<T> {
     /// # Examples
     /// ```
     /// # use coord::Size;
@@ -17,14 +17,14 @@ impl<U: Value, T: Value + Add<U, Output = T>> ExpandBy<U> for Size<T> {
     /// # use coord::ExpandBy;
     /// assert_eq!(Size::new(140, 180), Size::new(100, 100).expand_by(Vector::new(40, 80)));
     /// ```
-    fn expand_by(self, vector: Vector<U>) -> Self {
+    fn expand_by(self, vector: Vector<V>) -> Self {
         (self, vector).map(|(s, v)| s + v)
     }
 }
 
-impl<T: Value, U: Value> ExpandBy<U> for Rect<T>
+impl<T: Value, V: Value> ExpandBy<V> for Rect<T>
 where
-    Size<T>: ExpandBy<U>,
+    Size<T>: ExpandBy<V>,
 {
     /// # Examples
     /// ```
@@ -35,7 +35,7 @@ where
     /// # use coord::ExpandBy;
     /// assert_eq!(Rect::new(Point::new(2, 3), Size::new(14, 15)), Rect::new(Point::new(2, 3), Size::new(4, 5)).expand_by(Vector::new(10, 10)));
     /// ```
-    fn expand_by(self, vector: Vector<U>) -> Self {
+    fn expand_by(self, vector: Vector<V>) -> Self {
         Self::new(self.origin(), self.size().expand_by(vector))
     }
 }

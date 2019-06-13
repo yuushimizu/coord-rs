@@ -74,15 +74,15 @@ impl<T: Value + fmt::Display> fmt::Display for Vector<T> {
     }
 }
 
-impl<U: Value, T: Value + Add<U, Output = impl Value>> Add<Vector<U>> for Vector<T> {
-    type Output = Vector<<T as Add<U>>::Output>;
+impl<RHSV: Value, T: Value + Add<RHSV, Output = impl Value>> Add<Vector<RHSV>> for Vector<T> {
+    type Output = Vector<<T as Add<RHSV>>::Output>;
 
     /// # Examples
     /// ```
     /// # use coord::Vector;
     /// assert_eq!(Vector::new(10, 15), Vector::new(3, 9) + Vector::new(7, 6));
     /// ```
-    fn add(self, rhs: Vector<U>) -> Self::Output {
+    fn add(self, rhs: Vector<RHSV>) -> Self::Output {
         (self, rhs).map(|(n, m)| n + m)
     }
 }
@@ -100,41 +100,41 @@ impl<T: Value + Neg<Output = impl Value>> Neg for Vector<T> {
     }
 }
 
-impl<U: Value, T: Value + Sub<U, Output = impl Value>> Sub<Vector<U>> for Vector<T> {
-    type Output = Vector<<T as Sub<U>>::Output>;
+impl<RHSV: Value, T: Value + Sub<RHSV, Output = impl Value>> Sub<Vector<RHSV>> for Vector<T> {
+    type Output = Vector<<T as Sub<RHSV>>::Output>;
 
     /// # Examples
     /// ```
     /// # use coord::Vector;
     /// assert_eq!(Vector::new(3, 9), Vector::new(10, 15) - Vector::new(7, 6));
     /// ```
-    fn sub(self, rhs: Vector<U>) -> Self::Output {
+    fn sub(self, rhs: Vector<RHSV>) -> Self::Output {
         (self, rhs).map(|(n, m)| n - m)
     }
 }
 
-impl<U: Copy, T: Value + Mul<U, Output = impl Value>> Mul<U> for Vector<T> {
-    type Output = Vector<<T as Mul<U>>::Output>;
+impl<RHSV: Copy, T: Value + Mul<RHSV, Output = impl Value>> Mul<RHSV> for Vector<T> {
+    type Output = Vector<<T as Mul<RHSV>>::Output>;
 
     /// # Examples
     /// ```
     /// # use coord::Vector;
     /// assert_eq!(Vector::new(20, 30), Vector::new(2, 3) * 10);
     /// ```
-    fn mul(self, rhs: U) -> Self::Output {
+    fn mul(self, rhs: RHSV) -> Self::Output {
         self.map(|n| n * rhs)
     }
 }
 
-impl<U: Copy, T: Value + Div<U, Output = impl Value>> Div<U> for Vector<T> {
-    type Output = Vector<<T as Div<U>>::Output>;
+impl<RHSV: Copy, T: Value + Div<RHSV, Output = impl Value>> Div<RHSV> for Vector<T> {
+    type Output = Vector<<T as Div<RHSV>>::Output>;
 
     /// # Examples
     /// ```
     /// # use coord::Vector;
     /// assert_eq!(Vector::new(6, 8), Vector::new(60, 80) / 10);
     /// ```
-    fn div(self, rhs: U) -> Self::Output {
+    fn div(self, rhs: RHSV) -> Self::Output {
         self.map(|n| n / rhs)
     }
 }

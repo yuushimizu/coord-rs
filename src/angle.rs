@@ -1,7 +1,7 @@
 use num;
 use std::ops::{Add, Div, Mul, Neg, Rem, Sub};
 
-pub trait AngleComponent: num::Float {
+pub trait AnglePrimitive: num::Float {
     fn pi() -> Self;
 
     fn double(&self) -> Self;
@@ -11,7 +11,7 @@ pub trait AngleComponent: num::Float {
     }
 }
 
-impl AngleComponent for f32 {
+impl AnglePrimitive for f32 {
     fn pi() -> Self {
         std::f32::consts::PI
     }
@@ -21,7 +21,7 @@ impl AngleComponent for f32 {
     }
 }
 
-impl AngleComponent for f64 {
+impl AnglePrimitive for f64 {
     fn pi() -> Self {
         std::f64::consts::PI
     }
@@ -32,9 +32,9 @@ impl AngleComponent for f64 {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
-pub struct Angle<T: AngleComponent>(T);
+pub struct Angle<T: AnglePrimitive>(T);
 
-impl<T: AngleComponent> Angle<T> {
+impl<T: AnglePrimitive> Angle<T> {
     pub fn new(radian: T) -> Self {
         Self(radian)
     }
@@ -52,22 +52,20 @@ impl<T: AngleComponent> Angle<T> {
     }
 }
 
-impl<U: AngleComponent, T: AngleComponent + Add<U, Output = impl AngleComponent>> Add<Angle<U>>
-    for Angle<T>
-{
-    type Output = Angle<<T as Add<U>>::Output>;
+impl<RHSP: AnglePrimitive, T: AnglePrimitive + Add<RHSP, Output = impl AnglePrimitive>> Add<Angle<RHSP>> for Angle<T> {
+    type Output = Angle<<T as Add<RHSP>>::Output>;
 
     /// # Examples
     /// ```
     /// # use coord::Angle;
     /// assert_eq!(Angle::new(3.5), Angle::new(1.2) + Angle::new(2.3));
     /// ```
-    fn add(self, rhs: Angle<U>) -> Self::Output {
+    fn add(self, rhs: Angle<RHSP>) -> Self::Output {
         Self::Output::new(self.radian() + rhs.radian())
     }
 }
 
-impl<T: AngleComponent> Neg for Angle<T> {
+impl<T: AnglePrimitive> Neg for Angle<T> {
     type Output = Angle<<T as Neg>::Output>;
 
     fn neg(self) -> Self::Output {
@@ -75,36 +73,36 @@ impl<T: AngleComponent> Neg for Angle<T> {
     }
 }
 
-impl<U: AngleComponent, T: AngleComponent + Sub<U, Output = impl AngleComponent>> Sub<Angle<U>>
+impl<RHSP: AnglePrimitive, T: AnglePrimitive + Sub<RHSP, Output = impl AnglePrimitive>> Sub<Angle<RHSP>>
     for Angle<T>
 {
-    type Output = Angle<<T as Sub<U>>::Output>;
+    type Output = Angle<<T as Sub<RHSP>>::Output>;
 
-    fn sub(self, rhs: Angle<U>) -> Self::Output {
+    fn sub(self, rhs: Angle<RHSP>) -> Self::Output {
         Self::Output::new(self.radian() - rhs.radian())
     }
 }
 
-impl<U, T: AngleComponent + Mul<U, Output = impl AngleComponent>> Mul<U> for Angle<T> {
-    type Output = Angle<<T as Mul<U>>::Output>;
+impl<RHSP, T: AnglePrimitive + Mul<RHSP, Output = impl AnglePrimitive>> Mul<RHSP> for Angle<T> {
+    type Output = Angle<<T as Mul<RHSP>>::Output>;
 
-    fn mul(self, rhs: U) -> Self::Output {
+    fn mul(self, rhs: RHSP) -> Self::Output {
         Self::Output::new(self.radian() * rhs)
     }
 }
 
-impl<U, T: AngleComponent + Div<U, Output = impl AngleComponent>> Div<U> for Angle<T> {
-    type Output = Angle<<T as Div<U>>::Output>;
+impl<RHSP, T: AnglePrimitive + Div<RHSP, Output = impl AnglePrimitive>> Div<RHSP> for Angle<T> {
+    type Output = Angle<<T as Div<RHSP>>::Output>;
 
-    fn div(self, rhs: U) -> Self::Output {
+    fn div(self, rhs: RHSP) -> Self::Output {
         Self::Output::new(self.radian() / rhs)
     }
 }
 
-impl<U, T: AngleComponent + Rem<U, Output = impl AngleComponent>> Rem<U> for Angle<T> {
-    type Output = Angle<<T as Rem<U>>::Output>;
+impl<RHSP, T: AnglePrimitive + Rem<RHSP, Output = impl AnglePrimitive>> Rem<RHSP> for Angle<T> {
+    type Output = Angle<<T as Rem<RHSP>>::Output>;
 
-    fn rem(self, rhs: U) -> Self::Output {
+    fn rem(self, rhs: RHSP) -> Self::Output {
         Self::Output::new(self.radian() % rhs)
     }
 }

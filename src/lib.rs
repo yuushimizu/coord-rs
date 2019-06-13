@@ -15,7 +15,7 @@ pub mod vector;
 
 pub mod prelude {
     pub use crate::angle::Angle;
-    pub use crate::angle::AngleComponent;
+    pub use crate::angle::AnglePrimitive;
     pub use crate::axis::Axis;
     pub use crate::axis::AxisKeyed;
     pub use crate::coord::Coord;
