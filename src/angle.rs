@@ -31,7 +31,7 @@ impl AnglePrimitive for f64 {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub struct Angle<T: AnglePrimitive>(T);
 
 impl<T: AnglePrimitive> Angle<T> {
@@ -52,7 +52,9 @@ impl<T: AnglePrimitive> Angle<T> {
     }
 }
 
-impl<RHSP: AnglePrimitive, T: AnglePrimitive + Add<RHSP, Output = impl AnglePrimitive>> Add<Angle<RHSP>> for Angle<T> {
+impl<RHSP: AnglePrimitive, T: AnglePrimitive + Add<RHSP, Output = impl AnglePrimitive>>
+    Add<Angle<RHSP>> for Angle<T>
+{
     type Output = Angle<<T as Add<RHSP>>::Output>;
 
     /// # Examples
@@ -73,8 +75,8 @@ impl<T: AnglePrimitive> Neg for Angle<T> {
     }
 }
 
-impl<RHSP: AnglePrimitive, T: AnglePrimitive + Sub<RHSP, Output = impl AnglePrimitive>> Sub<Angle<RHSP>>
-    for Angle<T>
+impl<RHSP: AnglePrimitive, T: AnglePrimitive + Sub<RHSP, Output = impl AnglePrimitive>>
+    Sub<Angle<RHSP>> for Angle<T>
 {
     type Output = Angle<<T as Sub<RHSP>>::Output>;
 
