@@ -2,7 +2,7 @@ use crate::coord::{Coord, Primitive};
 use num;
 use std::fmt;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 pub struct Point<T: Primitive> {
     x: T,
     y: T,
@@ -81,16 +81,5 @@ impl<T: Primitive> Coord for Point<T> {
 impl<T: Primitive + fmt::Display> fmt::Display for Point<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "({}, {})", self.x(), self.y())
-    }
-}
-
-impl<T: Primitive + Default> Default for Point<T> {
-    /// # Examples
-    /// ```
-    /// # use coord::Point;
-    /// assert_eq!(Point::new(i32::default(), i32::default()), Point::default());
-    /// ```
-    fn default() -> Self {
-        Self::new(T::default(), T::default())
     }
 }

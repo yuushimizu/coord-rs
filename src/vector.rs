@@ -4,7 +4,7 @@ use num;
 use std::fmt;
 use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 pub struct Vector<T: Primitive> {
     x: T,
     y: T,
@@ -71,17 +71,6 @@ impl<T: Primitive> Coord for Vector<T> {
 impl<T: Primitive + fmt::Display> fmt::Display for Vector<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "({}, {})", self.x(), self.y())
-    }
-}
-
-impl<T: Primitive + Default> Default for Vector<T> {
-    /// # Examples
-    /// ```
-    /// # use coord::Vector;
-    /// assert_eq!(Vector::new(i32::default(), i32::default()), Vector::default());
-    /// ```
-    fn default() -> Self {
-        Self::new(T::default(), T::default())
     }
 }
 

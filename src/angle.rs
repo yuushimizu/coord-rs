@@ -33,7 +33,7 @@ impl AnglePrimitive for f64 {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default, PartialOrd, Ord)]
 pub struct Angle<T: AnglePrimitive>(T);
 
 impl<T: AnglePrimitive> Angle<T> {
@@ -51,17 +51,6 @@ impl<T: AnglePrimitive> Angle<T> {
 
     pub fn pi_2() -> Self {
         Self::new(T::pi_2())
-    }
-}
-
-impl<T: AnglePrimitive + Default> Default for Angle<T> {
-    /// # Examples
-    /// ```
-    /// # use coord::Angle;
-    /// assert_eq!(Angle::new(f32::default()), Angle::default());
-    /// ```
-    fn default() -> Self {
-        Self::new(T::default())
     }
 }
 

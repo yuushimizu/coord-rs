@@ -4,7 +4,7 @@ use crate::size::Size;
 use std::fmt;
 use std::ops::Add;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 pub struct Rect<T: Primitive> {
     origin: Point<T>,
     size: Size<T>,
@@ -113,18 +113,5 @@ impl<T: Primitive> Coord for Rect<T> {
 impl<T: Primitive + fmt::Display> fmt::Display for Rect<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "({}, {})", self.origin(), self.size())
-    }
-}
-
-impl<T: Primitive + Default> Default for Rect<T> {
-    /// # Examples
-    /// ```
-    /// # use coord::Point;
-    /// # use coord::Size;
-    /// # use coord::Rect;
-    /// assert_eq!(Rect::new(Point::new(i32::default(), i32::default()), Size::new(i32::default(), i32::default())), Rect::default());
-    /// ```
-    fn default() -> Self {
-        Self::new(Default::default(), Default::default())
     }
 }

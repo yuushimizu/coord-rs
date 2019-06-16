@@ -2,7 +2,7 @@ use crate::coord::{Coord, Primitive};
 use std::fmt;
 use std::ops::Mul;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 pub struct Size<T: Primitive> {
     width: T,
     height: T,
@@ -81,16 +81,5 @@ impl<T: Primitive> Coord for Size<T> {
 impl<T: Primitive + fmt::Display> fmt::Display for Size<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "({}, {})", self.width(), self.height())
-    }
-}
-
-impl<T: Primitive + Default> Default for Size<T> {
-    /// # Examples
-    /// ```
-    /// # use coord::Size;
-    ///  assert_eq!(Size::new(f64::default(), f64::default()), Size::default());
-    /// ```
-    fn default() -> Self {
-        Self::new(T::default(), T::default())
     }
 }
