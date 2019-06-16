@@ -2,7 +2,7 @@ use crate::coord::{Coord, Primimtive};
 use crate::map::Map;
 use num;
 use std::fmt;
-use std::ops::{Add, Div, Mul, Neg, Sub};
+use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct Vector<T: Primimtive> {
@@ -85,7 +85,9 @@ impl<T: Primimtive + Default> Default for Vector<T> {
     }
 }
 
-impl<RHSP: Primimtive, T: Primimtive + Add<RHSP, Output = impl Primimtive>> Add<Vector<RHSP>> for Vector<T> {
+impl<RHSP: Primimtive, T: Primimtive + Add<RHSP, Output = impl Primimtive>> Add<Vector<RHSP>>
+    for Vector<T>
+{
     type Output = Vector<<T as Add<RHSP>>::Output>;
 
     /// # Examples
@@ -95,6 +97,22 @@ impl<RHSP: Primimtive, T: Primimtive + Add<RHSP, Output = impl Primimtive>> Add<
     /// ```
     fn add(self, rhs: Vector<RHSP>) -> Self::Output {
         (self, rhs).map(|(n, m)| n + m)
+    }
+}
+
+impl<T: Primimtive, RHS> AddAssign<RHS> for Vector<T>
+where
+    Vector<T>: Add<RHS, Output = Self>,
+{
+    /// # Examples
+    /// ```
+    /// # use coord::Vector;
+    /// let mut v = Vector::new(3, 9);
+    /// v += Vector::new(7, 6);
+    /// assert_eq!(Vector::new(10, 15), v);
+    /// ```
+    fn add_assign(&mut self, rhs: RHS) {
+        *self = *self + rhs;
     }
 }
 
@@ -111,7 +129,9 @@ impl<T: Primimtive + Neg<Output = impl Primimtive>> Neg for Vector<T> {
     }
 }
 
-impl<RHSP: Primimtive, T: Primimtive + Sub<RHSP, Output = impl Primimtive>> Sub<Vector<RHSP>> for Vector<T> {
+impl<RHSP: Primimtive, T: Primimtive + Sub<RHSP, Output = impl Primimtive>> Sub<Vector<RHSP>>
+    for Vector<T>
+{
     type Output = Vector<<T as Sub<RHSP>>::Output>;
 
     /// # Examples
@@ -121,6 +141,22 @@ impl<RHSP: Primimtive, T: Primimtive + Sub<RHSP, Output = impl Primimtive>> Sub<
     /// ```
     fn sub(self, rhs: Vector<RHSP>) -> Self::Output {
         (self, rhs).map(|(n, m)| n - m)
+    }
+}
+
+impl<T: Primimtive, RHS> SubAssign<RHS> for Vector<T>
+where
+    Vector<T>: Sub<RHS, Output = Self>,
+{
+    /// # Examples
+    /// ```
+    /// # use coord::Vector;
+    /// let mut v = Vector::new(10, 15);
+    /// v -= Vector::new(7, 6);
+    /// assert_eq!(Vector::new(3, 9), v);
+    /// ```
+    fn sub_assign(&mut self, rhs: RHS) {
+        *self = *self - rhs;
     }
 }
 
@@ -137,6 +173,22 @@ impl<RHSP: Copy, T: Primimtive + Mul<RHSP, Output = impl Primimtive>> Mul<RHSP> 
     }
 }
 
+impl<T: Primimtive, RHS> MulAssign<RHS> for Vector<T>
+where
+    Vector<T>: Mul<RHS, Output = Self>,
+{
+    /// # Examples
+    /// ```
+    /// # use coord::Vector;
+    /// let mut v = Vector::new(2, 3);
+    /// v *= 10;
+    /// assert_eq!(Vector::new(20, 30), v);
+    /// ```
+    fn mul_assign(&mut self, rhs: RHS) {
+        *self = *self * rhs;
+    }
+}
+
 impl<RHSP: Copy, T: Primimtive + Div<RHSP, Output = impl Primimtive>> Div<RHSP> for Vector<T> {
     type Output = Vector<<T as Div<RHSP>>::Output>;
 
@@ -147,6 +199,22 @@ impl<RHSP: Copy, T: Primimtive + Div<RHSP, Output = impl Primimtive>> Div<RHSP> 
     /// ```
     fn div(self, rhs: RHSP) -> Self::Output {
         self.map(|n| n / rhs)
+    }
+}
+
+impl<T: Primimtive, RHS> DivAssign<RHS> for Vector<T>
+where
+    Vector<T>: Div<RHS, Output = Self>,
+{
+    /// # Examples
+    /// ```
+    /// # use coord::Vector;
+    /// let mut v = Vector::new(60, 80);
+    /// v /= 10;
+    /// assert_eq!(Vector::new(6, 8), v);
+    /// ```
+    fn div_assign(&mut self, rhs: RHS) {
+        *self = *self / rhs;
     }
 }
 

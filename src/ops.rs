@@ -3,9 +3,11 @@ use crate::map::Map;
 use crate::point::Point;
 use crate::size::Size;
 use crate::vector::Vector;
-use std::ops::{Add, Sub};
+use std::ops::{Add, AddAssign, Sub, SubAssign};
 
-impl<RHSP: Primimtive, T: Primimtive + Add<RHSP, Output = impl Primimtive>> Add<Vector<RHSP>> for Point<T> {
+impl<RHSP: Primimtive, T: Primimtive + Add<RHSP, Output = impl Primimtive>> Add<Vector<RHSP>>
+    for Point<T>
+{
     type Output = Point<<T as Add<RHSP>>::Output>;
 
     /// # Examples
@@ -19,7 +21,26 @@ impl<RHSP: Primimtive, T: Primimtive + Add<RHSP, Output = impl Primimtive>> Add<
     }
 }
 
-impl<RHSP: Primimtive, T: Primimtive + Sub<RHSP, Output = impl Primimtive>> Sub<Vector<RHSP>> for Point<T> {
+impl<T: Primimtive, RHS> AddAssign<RHS> for Point<T>
+where
+    Point<T>: Add<RHS, Output = Self>,
+{
+    /// # Examples
+    /// ```
+    /// # use coord::Point;
+    /// # use coord::Vector;
+    /// let mut p = Point::new(10, 20);
+    /// p += Vector::new(7, 9);
+    /// assert_eq!(Point::new(17, 29), p);
+    /// ```
+    fn add_assign(&mut self, rhs: RHS) {
+        *self = *self + rhs;
+    }
+}
+
+impl<RHSP: Primimtive, T: Primimtive + Sub<RHSP, Output = impl Primimtive>> Sub<Vector<RHSP>>
+    for Point<T>
+{
     type Output = Point<<T as Sub<RHSP>>::Output>;
 
     /// # Examples
@@ -33,7 +54,26 @@ impl<RHSP: Primimtive, T: Primimtive + Sub<RHSP, Output = impl Primimtive>> Sub<
     }
 }
 
-impl<RHSP: Primimtive, T: Primimtive + Sub<RHSP, Output = impl Primimtive>> Sub<Point<RHSP>> for Point<T> {
+impl<T: Primimtive, RHS> SubAssign<RHS> for Point<T>
+where
+    Point<T>: Sub<RHS, Output = Self>,
+{
+    /// # Examples
+    /// ```
+    /// # use coord::Point;
+    /// # use coord::Vector;
+    /// let mut p = Point::new(14, 27);
+    /// p -= Vector::new(10, 20);
+    /// assert_eq!(Point::new(4, 7), p);
+    /// ```
+    fn sub_assign(&mut self, rhs: RHS) {
+        *self = *self - rhs;
+    }
+}
+
+impl<RHSP: Primimtive, T: Primimtive + Sub<RHSP, Output = impl Primimtive>> Sub<Point<RHSP>>
+    for Point<T>
+{
     type Output = Vector<<T as Sub<RHSP>>::Output>;
 
     /// # Examples
@@ -47,7 +87,9 @@ impl<RHSP: Primimtive, T: Primimtive + Sub<RHSP, Output = impl Primimtive>> Sub<
     }
 }
 
-impl<RHSP: Primimtive, T: Primimtive + Add<RHSP, Output = impl Primimtive>> Add<Size<RHSP>> for Point<T> {
+impl<RHSP: Primimtive, T: Primimtive + Add<RHSP, Output = impl Primimtive>> Add<Size<RHSP>>
+    for Point<T>
+{
     type Output = Point<<T as Add<RHSP>>::Output>;
 
     /// # Examples
@@ -61,7 +103,9 @@ impl<RHSP: Primimtive, T: Primimtive + Add<RHSP, Output = impl Primimtive>> Add<
     }
 }
 
-impl<RHSP: Primimtive, T: Primimtive + Sub<RHSP, Output = impl Primimtive>> Sub<Size<RHSP>> for Point<T> {
+impl<RHSP: Primimtive, T: Primimtive + Sub<RHSP, Output = impl Primimtive>> Sub<Size<RHSP>>
+    for Point<T>
+{
     type Output = Point<<T as Sub<RHSP>>::Output>;
 
     /// # Examples
