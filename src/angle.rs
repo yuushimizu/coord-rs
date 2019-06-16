@@ -52,6 +52,17 @@ impl<T: AnglePrimitive> Angle<T> {
     }
 }
 
+impl<T: AnglePrimitive + Default> Default for Angle<T> {
+    /// # Examples
+    /// ```
+    /// # use coord::Angle;
+    /// assert_eq!(Angle::new(f32::default()), Angle::default());
+    /// ```
+    fn default() -> Self {
+        Self::new(T::default())
+    }
+}
+
 impl<RHSP: AnglePrimitive, T: AnglePrimitive + Add<RHSP, Output = impl AnglePrimitive>>
     Add<Angle<RHSP>> for Angle<T>
 {

@@ -83,3 +83,14 @@ impl<T: Value + fmt::Display> fmt::Display for Point<T> {
         write!(f, "({}, {})", self.x(), self.y())
     }
 }
+
+impl<T: Value + Default> Default for Point<T> {
+    /// # Examples
+    /// ```
+    /// # use coord::Point;
+    /// assert_eq!(Point::new(i32::default(), i32::default()), Point::default());
+    /// ```
+    fn default() -> Self {
+        Self::new(T::default(), T::default())
+    }
+}

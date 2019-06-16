@@ -83,3 +83,14 @@ impl<T: Value + fmt::Display> fmt::Display for Size<T> {
         write!(f, "({}, {})", self.width(), self.height())
     }
 }
+
+impl<T: Value + Default> Default for Size<T> {
+    /// # Examples
+    /// ```
+    /// # use coord::Size;
+    ///  assert_eq!(Size::new(f64::default(), f64::default()), Size::default());
+    /// ```
+    fn default() -> Self {
+        Self::new(T::default(), T::default())
+    }
+}

@@ -115,3 +115,16 @@ impl<T: Value + fmt::Display> fmt::Display for Rect<T> {
         write!(f, "({}, {})", self.origin(), self.size())
     }
 }
+
+impl<T: Value + Default> Default for Rect<T> {
+    /// # Examples
+    /// ```
+    /// # use coord::Point;
+    /// # use coord::Size;
+    /// # use coord::Rect;
+    /// assert_eq!(Rect::new(Point::new(i32::default(), i32::default()), Size::new(i32::default(), i32::default())), Rect::default());
+    /// ```
+    fn default() -> Self {
+        Self::new(Default::default(), Default::default())
+    }
+}

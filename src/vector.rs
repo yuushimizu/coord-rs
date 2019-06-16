@@ -74,6 +74,17 @@ impl<T: Value + fmt::Display> fmt::Display for Vector<T> {
     }
 }
 
+impl<T: Value + Default> Default for Vector<T> {
+    /// # Examples
+    /// ```
+    /// # use coord::Vector;
+    /// assert_eq!(Vector::new(i32::default(), i32::default()), Vector::default());
+    /// ```
+    fn default() -> Self {
+        Self::new(T::default(), T::default())
+    }
+}
+
 impl<RHSV: Value, T: Value + Add<RHSV, Output = impl Value>> Add<Vector<RHSV>> for Vector<T> {
     type Output = Vector<<T as Add<RHSV>>::Output>;
 
