@@ -1,8 +1,7 @@
 use crate::coord::Primitive;
 use crate::point::Point;
-use crate::point_iterator::{PointIterator, PointIteratorInclusive};
+use crate::point_iterator::{PointIterator, PointIteratorInclusive, PointStep};
 use crate::vector::Vector;
-use num;
 use std::ops;
 
 pub trait CoordRangeBounds<T: Primitive> {
@@ -48,7 +47,7 @@ pub trait CoordRange<T: Primitive> {
     fn points(&self) -> Self::PointIterator;
 }
 
-impl<T: Primitive + PartialOrd + num::One + ops::Add<Output = T>> CoordRange<T>
+impl<T: PointStep> CoordRange<T>
     for ops::Range<Point<T>>
 {
     type PointIterator = PointIterator<T, T>;
@@ -71,7 +70,7 @@ impl<T: Primitive + PartialOrd + num::One + ops::Add<Output = T>> CoordRange<T>
     }
 }
 
-impl<T: Primitive + PartialOrd + num::One + ops::Add<Output = T>> CoordRange<T>
+impl<T: PointStep> CoordRange<T>
     for ops::RangeInclusive<Point<T>>
 {
     type PointIterator = PointIteratorInclusive<T, T>;

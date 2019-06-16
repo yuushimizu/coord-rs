@@ -3,28 +3,11 @@ use crate::point::Point;
 use crate::rect::Rect;
 use crate::size::Size;
 use crate::vector::Vector;
-use num;
+use crate::point_iterator::{PointIterator, PointIteratorInclusive, PointStep};
+use crate::coord_range::CoordRange;
+use std::ops;
 
-pub trait Step:
-    Clone + num::Zero + num::One + num::ToPrimitive + PartialOrd + num::CheckedAdd
-{
-}
-
-impl<T: Clone + num::Zero + num::One + num::ToPrimitive + PartialOrd + num::CheckedAdd> Step for T {}
-
-impl<T: Primitive + Step> Size<T> {
-    fn points_step_by<R: Iterator<Item = T>>(
-        &self,
-        origin: Point<T>,
-        step: Vector<T>,
-        range_step: fn(T, T, T) -> R,
-    ) -> impl Iterator<Item = Point<T>> {
-        let stop_x = origin.x() + self.width();
-        range_step(origin.y(), origin.y() + self.height(), step.y()).flat_map(move |y| {
-            range_step(origin.x(), stop_x, step.x()).map(move |x| Point::new(x, y))
-        })
-    }
-
+impl<T: Primitive> Size<T> where Point<T>: ops::Add<Self, Output = Point<T>> {
     /// # Examples
     /// ```
     /// # use coord::Size;
@@ -37,8 +20,8 @@ impl<T: Primitive + Step> Size<T> {
     ///     ],
     ///     Size::new(6, 2).points_step(Point::new(3, 2), Vector::new(2, 1)).collect::<Vec<_>>());
     /// ```
-    pub fn points_step(&self, origin: Point<T>, step: Vector<T>) -> impl Iterator<Item = Point<T>> {
-        self.points_step_by(origin, step, num::range_step)
+    pub fn points_step<S: Primitive>(&self, origin: Point<T>, step: Vector<S>) -> impl Iterator<Item = Point<T>> where T: PointStep<S> {
+        PointIterator::new(origin, origin + *self, step)
     }
 
     /// # Examples
@@ -52,8 +35,8 @@ impl<T: Primitive + Step> Size<T> {
     ///     ],
     ///     Size::new(3, 2).points(Point::new(3, 2)).collect::<Vec<_>>());
     /// ```
-    pub fn points(&self, origin: Point<T>) -> impl Iterator<Item = Point<T>> {
-        self.points_step(origin, Vector::new(T::one(), T::one()))
+    pub fn points(&self, origin: Point<T>) -> impl Iterator<Item = Point<T>> where T: PointStep {
+        (origin..(origin + *self)).points()
     }
 
     /// # Examples
@@ -69,12 +52,12 @@ impl<T: Primitive + Step> Size<T> {
     ///     ],
     ///     Size::new(6, 2).points_step_inclusive(Point::new(3, 2), Vector::new(2, 1)).collect::<Vec<_>>());
     /// ```
-    pub fn points_step_inclusive(
+    pub fn points_step_inclusive<S: Primitive>(
         &self,
         origin: Point<T>,
-        step: Vector<T>,
-    ) -> impl Iterator<Item = Point<T>> {
-        self.points_step_by(origin, step, num::range_step_inclusive)
+        step: Vector<S>,
+    ) -> impl Iterator<Item = Point<T>> where T: PointStep<S> {
+        PointIteratorInclusive::new(origin, origin + *self, step)
     }
 
     /// # Examples
@@ -89,12 +72,12 @@ impl<T: Primitive + Step> Size<T> {
     ///     ],
     ///     Size::new(3, 2).points_inclusive(Point::new(3, 2)).collect::<Vec<_>>());
     /// ```
-    pub fn points_inclusive(&self, origin: Point<T>) -> impl Iterator<Item = Point<T>> {
-        self.points_step_inclusive(origin, Vector::new(T::one(), T::one()))
+    pub fn points_inclusive(&self, origin: Point<T>) -> impl Iterator<Item = Point<T>> where T: PointStep {
+        (origin..=(origin + *self)).points()
     }
 }
 
-impl<T: Primitive + Step> Rect<T> {
+impl<T: Primitive> Rect<T> {
     /// # Examples
     /// ```
     /// # use coord::Rect;
@@ -108,7 +91,7 @@ impl<T: Primitive + Step> Rect<T> {
     ///     ],
     ///     Rect::new(Point::new(10, 20), Size::new(2, 3)).points().collect::<Vec<_>>());
     /// ```
-    pub fn points(&self) -> impl Iterator<Item = Point<T>> {
+    pub fn points(&self) -> impl Iterator<Item = Point<T>> where T: PointStep {
         self.size().points(self.origin())
     }
 }
