@@ -1,16 +1,16 @@
-use crate::coord::{Coord, Primimtive};
+use crate::coord::{Coord, Primitive};
 use crate::map::Map;
 use num;
 use std::fmt;
 use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
-pub struct Vector<T: Primimtive> {
+pub struct Vector<T: Primitive> {
     x: T,
     y: T,
 }
 
-impl<T: Primimtive> Vector<T> {
+impl<T: Primitive> Vector<T> {
     pub fn new(x: T, y: T) -> Self {
         Self { x, y }
     }
@@ -46,7 +46,7 @@ impl<T: Primimtive> Vector<T> {
     }
 }
 
-impl<T: Primimtive> Coord for Vector<T> {
+impl<T: Primitive> Coord for Vector<T> {
     type Item = T;
 
     /// # Examples
@@ -68,13 +68,13 @@ impl<T: Primimtive> Coord for Vector<T> {
     }
 }
 
-impl<T: Primimtive + fmt::Display> fmt::Display for Vector<T> {
+impl<T: Primitive + fmt::Display> fmt::Display for Vector<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "({}, {})", self.x(), self.y())
     }
 }
 
-impl<T: Primimtive + Default> Default for Vector<T> {
+impl<T: Primitive + Default> Default for Vector<T> {
     /// # Examples
     /// ```
     /// # use coord::Vector;
@@ -85,7 +85,7 @@ impl<T: Primimtive + Default> Default for Vector<T> {
     }
 }
 
-impl<RHSP: Primimtive, T: Primimtive + Add<RHSP, Output = impl Primimtive>> Add<Vector<RHSP>>
+impl<RHSP: Primitive, T: Primitive + Add<RHSP, Output = impl Primitive>> Add<Vector<RHSP>>
     for Vector<T>
 {
     type Output = Vector<<T as Add<RHSP>>::Output>;
@@ -100,7 +100,7 @@ impl<RHSP: Primimtive, T: Primimtive + Add<RHSP, Output = impl Primimtive>> Add<
     }
 }
 
-impl<T: Primimtive, RHS> AddAssign<RHS> for Vector<T>
+impl<T: Primitive, RHS> AddAssign<RHS> for Vector<T>
 where
     Vector<T>: Add<RHS, Output = Self>,
 {
@@ -116,7 +116,7 @@ where
     }
 }
 
-impl<T: Primimtive + Neg<Output = impl Primimtive>> Neg for Vector<T> {
+impl<T: Primitive + Neg<Output = impl Primitive>> Neg for Vector<T> {
     type Output = Vector<<T as Neg>::Output>;
 
     /// # Examples
@@ -129,7 +129,7 @@ impl<T: Primimtive + Neg<Output = impl Primimtive>> Neg for Vector<T> {
     }
 }
 
-impl<RHSP: Primimtive, T: Primimtive + Sub<RHSP, Output = impl Primimtive>> Sub<Vector<RHSP>>
+impl<RHSP: Primitive, T: Primitive + Sub<RHSP, Output = impl Primitive>> Sub<Vector<RHSP>>
     for Vector<T>
 {
     type Output = Vector<<T as Sub<RHSP>>::Output>;
@@ -144,7 +144,7 @@ impl<RHSP: Primimtive, T: Primimtive + Sub<RHSP, Output = impl Primimtive>> Sub<
     }
 }
 
-impl<T: Primimtive, RHS> SubAssign<RHS> for Vector<T>
+impl<T: Primitive, RHS> SubAssign<RHS> for Vector<T>
 where
     Vector<T>: Sub<RHS, Output = Self>,
 {
@@ -160,7 +160,7 @@ where
     }
 }
 
-impl<RHSP: Copy, T: Primimtive + Mul<RHSP, Output = impl Primimtive>> Mul<RHSP> for Vector<T> {
+impl<RHSP: Copy, T: Primitive + Mul<RHSP, Output = impl Primitive>> Mul<RHSP> for Vector<T> {
     type Output = Vector<<T as Mul<RHSP>>::Output>;
 
     /// # Examples
@@ -173,7 +173,7 @@ impl<RHSP: Copy, T: Primimtive + Mul<RHSP, Output = impl Primimtive>> Mul<RHSP> 
     }
 }
 
-impl<T: Primimtive, RHS> MulAssign<RHS> for Vector<T>
+impl<T: Primitive, RHS> MulAssign<RHS> for Vector<T>
 where
     Vector<T>: Mul<RHS, Output = Self>,
 {
@@ -189,7 +189,7 @@ where
     }
 }
 
-impl<RHSP: Copy, T: Primimtive + Div<RHSP, Output = impl Primimtive>> Div<RHSP> for Vector<T> {
+impl<RHSP: Copy, T: Primitive + Div<RHSP, Output = impl Primitive>> Div<RHSP> for Vector<T> {
     type Output = Vector<<T as Div<RHSP>>::Output>;
 
     /// # Examples
@@ -202,7 +202,7 @@ impl<RHSP: Copy, T: Primimtive + Div<RHSP, Output = impl Primimtive>> Div<RHSP> 
     }
 }
 
-impl<T: Primimtive, RHS> DivAssign<RHS> for Vector<T>
+impl<T: Primitive, RHS> DivAssign<RHS> for Vector<T>
 where
     Vector<T>: Div<RHS, Output = Self>,
 {
@@ -218,7 +218,7 @@ where
     }
 }
 
-impl<T: Primimtive + num::Zero> num::Zero for Vector<T> {
+impl<T: Primitive + num::Zero> num::Zero for Vector<T> {
     /// # Examples
     /// ```
     /// # use coord::Vector;

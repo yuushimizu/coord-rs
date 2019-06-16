@@ -1,15 +1,15 @@
-use crate::coord::Primimtive;
+use crate::coord::Primitive;
 use crate::map::Map;
 use crate::rect::Rect;
 use crate::size::Size;
 use crate::vector::Vector;
 use std::ops::Add;
 
-pub trait ExpandBy<T: Primimtive> {
+pub trait ExpandBy<T: Primitive> {
     fn expand_by(self, vector: Vector<T>) -> Self;
 }
 
-impl<VP: Primimtive, T: Primimtive + Add<VP, Output = T>> ExpandBy<VP> for Size<T> {
+impl<VP: Primitive, T: Primitive + Add<VP, Output = T>> ExpandBy<VP> for Size<T> {
     /// # Examples
     /// ```
     /// # use coord::Size;
@@ -22,7 +22,7 @@ impl<VP: Primimtive, T: Primimtive + Add<VP, Output = T>> ExpandBy<VP> for Size<
     }
 }
 
-impl<T: Primimtive, VP: Primimtive> ExpandBy<VP> for Rect<T>
+impl<T: Primitive, VP: Primitive> ExpandBy<VP> for Rect<T>
 where
     Size<T>: ExpandBy<VP>,
 {

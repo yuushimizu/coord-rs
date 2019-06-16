@@ -1,16 +1,16 @@
-use crate::coord::{Coord, Primimtive};
+use crate::coord::{Coord, Primitive};
 use crate::point::Point;
 use crate::size::Size;
 use std::fmt;
 use std::ops::Add;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
-pub struct Rect<T: Primimtive> {
+pub struct Rect<T: Primitive> {
     origin: Point<T>,
     size: Size<T>,
 }
 
-impl<T: Primimtive> Rect<T> {
+impl<T: Primitive> Rect<T> {
     pub fn new(origin: Point<T>, size: Size<T>) -> Self {
         Self { origin, size }
     }
@@ -70,7 +70,7 @@ impl<T: Primimtive> Rect<T> {
     }
 }
 
-impl<T: Primimtive> Coord for Rect<T> {
+impl<T: Primitive> Coord for Rect<T> {
     type Item = (T, T);
 
     /// # Examples
@@ -110,13 +110,13 @@ impl<T: Primimtive> Coord for Rect<T> {
     }
 }
 
-impl<T: Primimtive + fmt::Display> fmt::Display for Rect<T> {
+impl<T: Primitive + fmt::Display> fmt::Display for Rect<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "({}, {})", self.origin(), self.size())
     }
 }
 
-impl<T: Primimtive + Default> Default for Rect<T> {
+impl<T: Primitive + Default> Default for Rect<T> {
     /// # Examples
     /// ```
     /// # use coord::Point;

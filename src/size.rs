@@ -1,14 +1,14 @@
-use crate::coord::{Coord, Primimtive};
+use crate::coord::{Coord, Primitive};
 use std::fmt;
 use std::ops::Mul;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
-pub struct Size<T: Primimtive> {
+pub struct Size<T: Primitive> {
     width: T,
     height: T,
 }
 
-impl<T: Primimtive> Size<T> {
+impl<T: Primitive> Size<T> {
     pub fn new(width: T, height: T) -> Self {
         Self { width, height }
     }
@@ -44,7 +44,7 @@ impl<T: Primimtive> Size<T> {
     }
 }
 
-impl<T: Primimtive> Coord for Size<T> {
+impl<T: Primitive> Coord for Size<T> {
     type Item = T;
 
     /// # Examples
@@ -78,13 +78,13 @@ impl<T: Primimtive> Coord for Size<T> {
     }
 }
 
-impl<T: Primimtive + fmt::Display> fmt::Display for Size<T> {
+impl<T: Primitive + fmt::Display> fmt::Display for Size<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "({}, {})", self.width(), self.height())
     }
 }
 
-impl<T: Primimtive + Default> Default for Size<T> {
+impl<T: Primitive + Default> Default for Size<T> {
     /// # Examples
     /// ```
     /// # use coord::Size;

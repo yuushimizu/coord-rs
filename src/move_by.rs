@@ -1,14 +1,14 @@
-use crate::coord::Primimtive;
+use crate::coord::Primitive;
 use crate::point::Point;
 use crate::rect::Rect;
 use crate::vector::Vector;
 use std::ops::Add;
 
-pub trait MoveBy<T: Primimtive> {
+pub trait MoveBy<T: Primitive> {
     fn move_by(self, vector: Vector<T>) -> Self;
 }
 
-impl<T: Primimtive, VP: Primimtive> MoveBy<VP> for Point<T>
+impl<T: Primitive, VP: Primitive> MoveBy<VP> for Point<T>
 where
     Point<T>: Add<Vector<VP>, Output = Point<T>>,
 {
@@ -24,7 +24,7 @@ where
     }
 }
 
-impl<T: Primimtive, VP: Primimtive> MoveBy<VP> for Rect<T>
+impl<T: Primitive, VP: Primitive> MoveBy<VP> for Rect<T>
 where
     Point<T>: MoveBy<VP>,
 {
@@ -42,7 +42,7 @@ where
     }
 }
 
-impl<VP: Primimtive, T: MoveBy<VP>> MoveBy<VP> for (T,) {
+impl<VP: Primitive, T: MoveBy<VP>> MoveBy<VP> for (T,) {
     /// # Examples
     /// ```
     /// # use coord::Point;
@@ -55,7 +55,7 @@ impl<VP: Primimtive, T: MoveBy<VP>> MoveBy<VP> for (T,) {
     }
 }
 
-impl<VP: Primimtive, T0: MoveBy<VP>, T1: MoveBy<VP>> MoveBy<VP> for (T0, T1) {
+impl<VP: Primitive, T0: MoveBy<VP>, T1: MoveBy<VP>> MoveBy<VP> for (T0, T1) {
     /// # Examples
     /// ```
     /// # use coord::Point;
@@ -72,7 +72,7 @@ impl<VP: Primimtive, T0: MoveBy<VP>, T1: MoveBy<VP>> MoveBy<VP> for (T0, T1) {
     }
 }
 
-impl<VP: Primimtive, T0: MoveBy<VP>, T1: MoveBy<VP>, T2: MoveBy<VP>> MoveBy<VP> for (T0, T1, T2) {
+impl<VP: Primitive, T0: MoveBy<VP>, T1: MoveBy<VP>, T2: MoveBy<VP>> MoveBy<VP> for (T0, T1, T2) {
     /// # Examples
     /// ```
     /// # use coord::Point;

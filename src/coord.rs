@@ -1,9 +1,9 @@
-pub trait Primimtive: Copy {}
+pub trait Primitive: Copy {}
 
-impl<T: Copy> Primimtive for T {}
+impl<T: Copy> Primitive for T {}
 
 pub trait Coord: Copy {
-    type Item: Primimtive;
+    type Item: Primitive;
 
     fn from_x_y(x: Self::Item, y: Self::Item) -> Self;
 
