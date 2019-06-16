@@ -12,6 +12,8 @@ pub mod size;
 pub mod transpose;
 pub mod tuple;
 pub mod vector;
+pub mod coord_range;
+pub mod point_iterator;
 
 pub mod prelude {
     pub use crate::angle::Angle;
@@ -28,6 +30,10 @@ pub mod prelude {
     pub use crate::size::Size;
     pub use crate::transpose::Transpose;
     pub use crate::vector::Vector;
+    pub use crate::coord_range::CoordRangeBounds;
+    pub use crate::coord_range::CoordRange;
+    pub use crate::point_iterator::PointIterator;
+    pub use crate::point_iterator::PointIteratorInclusive;
 }
 
 pub use prelude::*;
