@@ -1,15 +1,15 @@
-use crate::coord::Value;
+use crate::coord::Primimtive;
 use crate::map::Map;
 use crate::rect::Rect;
 use crate::size::Size;
 use crate::vector::Vector;
 use std::ops::Add;
 
-pub trait ExpandBy<T: Value> {
+pub trait ExpandBy<T: Primimtive> {
     fn expand_by(self, vector: Vector<T>) -> Self;
 }
 
-impl<V: Value, T: Value + Add<V, Output = T>> ExpandBy<V> for Size<T> {
+impl<VP: Primimtive, T: Primimtive + Add<VP, Output = T>> ExpandBy<VP> for Size<T> {
     /// # Examples
     /// ```
     /// # use coord::Size;
@@ -17,14 +17,14 @@ impl<V: Value, T: Value + Add<V, Output = T>> ExpandBy<V> for Size<T> {
     /// # use coord::ExpandBy;
     /// assert_eq!(Size::new(140, 180), Size::new(100, 100).expand_by(Vector::new(40, 80)));
     /// ```
-    fn expand_by(self, vector: Vector<V>) -> Self {
+    fn expand_by(self, vector: Vector<VP>) -> Self {
         (self, vector).map(|(s, v)| s + v)
     }
 }
 
-impl<T: Value, V: Value> ExpandBy<V> for Rect<T>
+impl<T: Primimtive, VP: Primimtive> ExpandBy<VP> for Rect<T>
 where
-    Size<T>: ExpandBy<V>,
+    Size<T>: ExpandBy<VP>,
 {
     /// # Examples
     /// ```
@@ -35,7 +35,7 @@ where
     /// # use coord::ExpandBy;
     /// assert_eq!(Rect::new(Point::new(2, 3), Size::new(14, 15)), Rect::new(Point::new(2, 3), Size::new(4, 5)).expand_by(Vector::new(10, 10)));
     /// ```
-    fn expand_by(self, vector: Vector<V>) -> Self {
+    fn expand_by(self, vector: Vector<VP>) -> Self {
         Self::new(self.origin(), self.size().expand_by(vector))
     }
 }

@@ -19,6 +19,7 @@ pub mod prelude {
     pub use crate::axis::Axis;
     pub use crate::axis::AxisKeyed;
     pub use crate::coord::Coord;
+    pub use crate::coord::Primimtive;
     pub use crate::expand_by::ExpandBy;
     pub use crate::map::Map;
     pub use crate::move_by::MoveBy;

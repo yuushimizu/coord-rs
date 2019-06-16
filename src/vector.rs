@@ -1,16 +1,16 @@
-use crate::coord::{Coord, Value};
+use crate::coord::{Coord, Primimtive};
 use crate::map::Map;
 use num;
 use std::fmt;
 use std::ops::{Add, Div, Mul, Neg, Sub};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
-pub struct Vector<T: Value> {
+pub struct Vector<T: Primimtive> {
     x: T,
     y: T,
 }
 
-impl<T: Value> Vector<T> {
+impl<T: Primimtive> Vector<T> {
     pub fn new(x: T, y: T) -> Self {
         Self { x, y }
     }
@@ -46,7 +46,7 @@ impl<T: Value> Vector<T> {
     }
 }
 
-impl<T: Value> Coord for Vector<T> {
+impl<T: Primimtive> Coord for Vector<T> {
     type Item = T;
 
     /// # Examples
@@ -68,13 +68,13 @@ impl<T: Value> Coord for Vector<T> {
     }
 }
 
-impl<T: Value + fmt::Display> fmt::Display for Vector<T> {
+impl<T: Primimtive + fmt::Display> fmt::Display for Vector<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "({}, {})", self.x(), self.y())
     }
 }
 
-impl<T: Value + Default> Default for Vector<T> {
+impl<T: Primimtive + Default> Default for Vector<T> {
     /// # Examples
     /// ```
     /// # use coord::Vector;
@@ -85,20 +85,20 @@ impl<T: Value + Default> Default for Vector<T> {
     }
 }
 
-impl<RHSV: Value, T: Value + Add<RHSV, Output = impl Value>> Add<Vector<RHSV>> for Vector<T> {
-    type Output = Vector<<T as Add<RHSV>>::Output>;
+impl<RHSP: Primimtive, T: Primimtive + Add<RHSP, Output = impl Primimtive>> Add<Vector<RHSP>> for Vector<T> {
+    type Output = Vector<<T as Add<RHSP>>::Output>;
 
     /// # Examples
     /// ```
     /// # use coord::Vector;
     /// assert_eq!(Vector::new(10, 15), Vector::new(3, 9) + Vector::new(7, 6));
     /// ```
-    fn add(self, rhs: Vector<RHSV>) -> Self::Output {
+    fn add(self, rhs: Vector<RHSP>) -> Self::Output {
         (self, rhs).map(|(n, m)| n + m)
     }
 }
 
-impl<T: Value + Neg<Output = impl Value>> Neg for Vector<T> {
+impl<T: Primimtive + Neg<Output = impl Primimtive>> Neg for Vector<T> {
     type Output = Vector<<T as Neg>::Output>;
 
     /// # Examples
@@ -111,46 +111,46 @@ impl<T: Value + Neg<Output = impl Value>> Neg for Vector<T> {
     }
 }
 
-impl<RHSV: Value, T: Value + Sub<RHSV, Output = impl Value>> Sub<Vector<RHSV>> for Vector<T> {
-    type Output = Vector<<T as Sub<RHSV>>::Output>;
+impl<RHSP: Primimtive, T: Primimtive + Sub<RHSP, Output = impl Primimtive>> Sub<Vector<RHSP>> for Vector<T> {
+    type Output = Vector<<T as Sub<RHSP>>::Output>;
 
     /// # Examples
     /// ```
     /// # use coord::Vector;
     /// assert_eq!(Vector::new(3, 9), Vector::new(10, 15) - Vector::new(7, 6));
     /// ```
-    fn sub(self, rhs: Vector<RHSV>) -> Self::Output {
+    fn sub(self, rhs: Vector<RHSP>) -> Self::Output {
         (self, rhs).map(|(n, m)| n - m)
     }
 }
 
-impl<RHSV: Copy, T: Value + Mul<RHSV, Output = impl Value>> Mul<RHSV> for Vector<T> {
-    type Output = Vector<<T as Mul<RHSV>>::Output>;
+impl<RHSP: Copy, T: Primimtive + Mul<RHSP, Output = impl Primimtive>> Mul<RHSP> for Vector<T> {
+    type Output = Vector<<T as Mul<RHSP>>::Output>;
 
     /// # Examples
     /// ```
     /// # use coord::Vector;
     /// assert_eq!(Vector::new(20, 30), Vector::new(2, 3) * 10);
     /// ```
-    fn mul(self, rhs: RHSV) -> Self::Output {
+    fn mul(self, rhs: RHSP) -> Self::Output {
         self.map(|n| n * rhs)
     }
 }
 
-impl<RHSV: Copy, T: Value + Div<RHSV, Output = impl Value>> Div<RHSV> for Vector<T> {
-    type Output = Vector<<T as Div<RHSV>>::Output>;
+impl<RHSP: Copy, T: Primimtive + Div<RHSP, Output = impl Primimtive>> Div<RHSP> for Vector<T> {
+    type Output = Vector<<T as Div<RHSP>>::Output>;
 
     /// # Examples
     /// ```
     /// # use coord::Vector;
     /// assert_eq!(Vector::new(6, 8), Vector::new(60, 80) / 10);
     /// ```
-    fn div(self, rhs: RHSV) -> Self::Output {
+    fn div(self, rhs: RHSP) -> Self::Output {
         self.map(|n| n / rhs)
     }
 }
 
-impl<T: Value + num::Zero> num::Zero for Vector<T> {
+impl<T: Primimtive + num::Zero> num::Zero for Vector<T> {
     /// # Examples
     /// ```
     /// # use coord::Vector;

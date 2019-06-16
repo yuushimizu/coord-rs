@@ -1,4 +1,4 @@
-use crate::coord::Value;
+use crate::coord::Primimtive;
 use crate::point::Point;
 use crate::rect::Rect;
 use crate::size::Size;
@@ -12,7 +12,7 @@ pub trait Step:
 
 impl<T: Clone + num::Zero + num::One + num::ToPrimitive + PartialOrd + num::CheckedAdd> Step for T {}
 
-impl<T: Value + Step> Size<T> {
+impl<T: Primimtive + Step> Size<T> {
     fn points_step_by<R: Iterator<Item = T>>(
         &self,
         origin: Point<T>,
@@ -94,7 +94,7 @@ impl<T: Value + Step> Size<T> {
     }
 }
 
-impl<T: Value + Step> Rect<T> {
+impl<T: Primimtive + Step> Rect<T> {
     /// # Examples
     /// ```
     /// # use coord::Rect;
