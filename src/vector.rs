@@ -20,7 +20,7 @@ impl<T: Primitive> Vector<T> {
     /// # use coord::Vector;
     /// assert_eq!(3, Vector::new(3, 4).x());
     /// ```
-    pub fn x(&self) -> T {
+    pub fn x(self) -> T {
         self.x
     }
 
@@ -29,7 +29,7 @@ impl<T: Primitive> Vector<T> {
     /// # use coord::Vector;
     /// assert_eq!(4, Vector::new(3, 4).y());
     /// ```
-    pub fn y(&self) -> T {
+    pub fn y(self) -> T {
         self.y
     }
 
@@ -38,7 +38,7 @@ impl<T: Primitive> Vector<T> {
     /// # use coord::Vector;
     /// assert_eq!(5.0, Vector::new(3.0, 4.0).magnitude());
     /// ```
-    pub fn magnitude(&self) -> T
+    pub fn magnitude(self) -> T
     where
         T: num::Float,
     {
@@ -59,11 +59,11 @@ impl<T: Primitive> Coord for Vector<T> {
         Self::new(x, y)
     }
 
-    fn x(&self) -> T {
+    fn x(self) -> T {
         self.x()
     }
 
-    fn y(&self) -> T {
+    fn y(self) -> T {
         self.y()
     }
 }

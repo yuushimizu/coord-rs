@@ -18,7 +18,7 @@ impl<T: Primitive> Size<T> {
     /// # use coord::Size;
     /// assert_eq!(10, Size::new(10, 20).width());
     /// ```
-    pub fn width(&self) -> T {
+    pub fn width(self) -> T {
         self.width
     }
 
@@ -27,7 +27,7 @@ impl<T: Primitive> Size<T> {
     /// # use coord::Size;
     /// assert_eq!(20, Size::new(10, 20).height());
     /// ```
-    pub fn height(&self) -> T {
+    pub fn height(self) -> T {
         self.height
     }
 
@@ -36,7 +36,7 @@ impl<T: Primitive> Size<T> {
     /// # use coord::Size;
     /// assert_eq!(12, Size::new(3, 4).area());
     /// ```
-    pub fn area(&self) -> <T as Mul<T>>::Output
+    pub fn area(self) -> <T as Mul<T>>::Output
     where
         T: Mul<T>,
     {
@@ -63,7 +63,7 @@ impl<T: Primitive> Coord for Size<T> {
     /// # use coord::Coord;
     /// assert_eq!(5, Size::from_x_y(5, 7).x());
     /// ```
-    fn x(&self) -> T {
+    fn x(self) -> T {
         self.width()
     }
 
@@ -73,7 +73,7 @@ impl<T: Primitive> Coord for Size<T> {
     /// # use coord::Coord;
     /// assert_eq!(7, Size::from_x_y(5, 7).y());
     /// ```
-    fn y(&self) -> T {
+    fn y(self) -> T {
         self.height()
     }
 }

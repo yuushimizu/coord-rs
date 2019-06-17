@@ -13,7 +13,7 @@ impl<C: Coord> Coord for (C,) {
     /// # use coord::Point;
     /// assert_eq!((10,), (Point::new(10, 20),).x());
     /// ```
-    fn x(&self) -> Self::Item {
+    fn x(self) -> Self::Item {
         (self.0.x(),)
     }
 
@@ -23,7 +23,7 @@ impl<C: Coord> Coord for (C,) {
     /// # use coord::Point;
     /// assert_eq!((20,), (Point::new(10, 20),).y());
     /// ```
-    fn y(&self) -> Self::Item {
+    fn y(self) -> Self::Item {
         (self.0.y(),)
     }
 }
@@ -42,7 +42,7 @@ impl<C0: Coord, C1: Coord> Coord for (C0, C1) {
     /// # use coord::Vector;
     /// assert_eq!((1, 2), (Vector::new(1, 10), Point::new(2, 20)).x());
     /// ```
-    fn x(&self) -> Self::Item {
+    fn x(self) -> Self::Item {
         (self.0.x(), self.1.x())
     }
 
@@ -53,7 +53,7 @@ impl<C0: Coord, C1: Coord> Coord for (C0, C1) {
     /// # use coord::Vector;
     /// assert_eq!((10, 20), (Vector::new(1, 10), Point::new(2, 20)).y());
     /// ```
-    fn y(&self) -> Self::Item {
+    fn y(self) -> Self::Item {
         (self.0.y(), self.1.y())
     }
 }
@@ -81,7 +81,7 @@ impl<C0: Coord, C1: Coord, C2: Coord> Coord for (C0, C1, C2) {
     /// # use coord::Size;
     /// assert_eq!((1, 2, 3), (Vector::new(1, 10), Point::new(2, 20), Size::new(3, 30)).x());
     /// ```
-    fn x(&self) -> Self::Item {
+    fn x(self) -> Self::Item {
         (self.0.x(), self.1.x(), self.2.x())
     }
 
@@ -93,7 +93,7 @@ impl<C0: Coord, C1: Coord, C2: Coord> Coord for (C0, C1, C2) {
     /// # use coord::Size;
     /// assert_eq!((10, 20, 30), (Vector::new(1, 10), Point::new(2, 20), Size::new(3, 30)).y());
     /// ```
-    fn y(&self) -> Self::Item {
+    fn y(self) -> Self::Item {
         (self.0.y(), self.1.y(), self.2.y())
     }
 }

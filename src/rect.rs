@@ -22,7 +22,7 @@ impl<T: Primitive> Rect<T> {
     /// # use coord::Size;
     /// assert_eq!(Point::new(4, 5), Rect::new(Point::new(4, 5), Size::new(10, 20)).origin());
     /// ```
-    pub fn origin(&self) -> Point<T> {
+    pub fn origin(self) -> Point<T> {
         self.origin
     }
 
@@ -33,7 +33,7 @@ impl<T: Primitive> Rect<T> {
     /// # use coord::Size;
     /// assert_eq!(Size::new(10, 20), Rect::new(Point::new(4, 5), Size::new(10, 20)).size());
     /// ```
-    pub fn size(&self) -> Size<T> {
+    pub fn size(self) -> Size<T> {
         self.size
     }
 
@@ -44,7 +44,7 @@ impl<T: Primitive> Rect<T> {
     /// # use coord::Size;
     /// assert_eq!(Point::new(13, 24), Rect::new(Point::new(3, 4), Size::new(10, 20)).max());
     /// ```
-    pub fn max(&self) -> Point<T>
+    pub fn max(self) -> Point<T>
     where
         Point<T>: Add<Size<T>, Output = Point<T>>,
     {
@@ -93,7 +93,7 @@ impl<T: Primitive> Coord for Rect<T> {
     /// # use coord::Coord;
     /// assert_eq!((1, 5), Rect::new(Point::new(1, 2), Size::new(5, 6)).x());
     /// ```
-    fn x(&self) -> (T, T) {
+    fn x(self) -> (T, T) {
         (self.origin().x(), self.size().x())
     }
 
@@ -105,7 +105,7 @@ impl<T: Primitive> Coord for Rect<T> {
     /// # use coord::Coord;
     /// assert_eq!((2, 6), Rect::new(Point::new(1, 2), Size::new(5, 6)).y());
     /// ```
-    fn y(&self) -> (T, T) {
+    fn y(self) -> (T, T) {
         (self.origin().y(), self.size().y())
     }
 }

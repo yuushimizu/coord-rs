@@ -18,7 +18,7 @@ impl<T: Primitive> Point<T> {
     /// # use coord::Point;
     /// assert_eq!(4, Point::new(4, 8).x());
     /// ```
-    pub fn x(&self) -> T {
+    pub fn x(self) -> T {
         self.x
     }
 
@@ -27,7 +27,7 @@ impl<T: Primitive> Point<T> {
     /// # use coord::Point;
     /// assert_eq!(8, Point::new(4, 8).y());
     /// ```
-    pub fn y(&self) -> T {
+    pub fn y(self) -> T {
         self.y
     }
 
@@ -69,11 +69,11 @@ impl<T: Primitive> Coord for Point<T> {
         Self::new(x, y)
     }
 
-    fn x(&self) -> T {
+    fn x(self) -> T {
         self.x()
     }
 
-    fn y(&self) -> T {
+    fn y(self) -> T {
         self.y()
     }
 }
