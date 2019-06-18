@@ -34,14 +34,14 @@ fn next<S: Primitive, T: PointStep<S>>(
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
-pub struct PointIterator<T: Primitive, S: Primitive> {
+pub struct PointRangeIterator<T: Primitive, S: Primitive> {
     start: Point<T>,
     end: Point<T>,
     step: Vector<S>,
     current: Point<T>,
 }
 
-impl<T: Primitive, S: Primitive> PointIterator<T, S> {
+impl<T: Primitive, S: Primitive> PointRangeIterator<T, S> {
     pub fn new(start: Point<T>, end: Point<T>, step: Vector<S>) -> Self {
         Self {
             start,
@@ -52,7 +52,7 @@ impl<T: Primitive, S: Primitive> PointIterator<T, S> {
     }
 }
 
-impl<S: Primitive, T: PointStep<S>> Iterator for PointIterator<T, S> {
+impl<S: Primitive, T: PointStep<S>> Iterator for PointRangeIterator<T, S> {
     type Item = Point<T>;
 
     fn next(&mut self) -> Option<Point<T>> {
@@ -67,14 +67,14 @@ impl<S: Primitive, T: PointStep<S>> Iterator for PointIterator<T, S> {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
-pub struct PointIteratorInclusive<T: Primitive, S: Primitive> {
+pub struct PointRangeIteratorInclusive<T: Primitive, S: Primitive> {
     start: Point<T>,
     end: Point<T>,
     step: Vector<S>,
     current: Point<T>,
 }
 
-impl<T: Primitive, S: Primitive> PointIteratorInclusive<T, S> {
+impl<T: Primitive, S: Primitive> PointRangeIteratorInclusive<T, S> {
     pub fn new(start: Point<T>, end: Point<T>, step: Vector<S>) -> Self {
         Self {
             start,
@@ -85,7 +85,7 @@ impl<T: Primitive, S: Primitive> PointIteratorInclusive<T, S> {
     }
 }
 
-impl<S: Primitive, T: PointStep<S>> Iterator for PointIteratorInclusive<T, S> {
+impl<S: Primitive, T: PointStep<S>> Iterator for PointRangeIteratorInclusive<T, S> {
     type Item = Point<T>;
 
     fn next(&mut self) -> Option<Point<T>> {

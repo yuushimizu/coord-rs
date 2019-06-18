@@ -1,6 +1,6 @@
 use crate::coord::Primitive;
 use crate::point::Point;
-use crate::point_iterator::{PointIterator, PointIteratorInclusive, PointStep};
+use crate::point_range_iterator::{PointRangeIterator, PointRangeIteratorInclusive, PointStep};
 use crate::vector::Vector;
 use std::ops;
 
@@ -50,7 +50,7 @@ pub trait CoordRange<T: Primitive> {
 impl<T: PointStep> CoordRange<T>
     for ops::Range<Point<T>>
 {
-    type PointIterator = PointIterator<T, T>;
+    type PointIterator = PointRangeIterator<T, T>;
 
     /// # Examples
     /// ```
@@ -66,14 +66,14 @@ impl<T: PointStep> CoordRange<T>
     ///     (Point::new(10, 20)..Point::new(13, 24)).points().collect::<Vec<_>>());
     /// ```
     fn points(&self) -> Self::PointIterator {
-        PointIterator::new(self.start, self.end, Vector::new(T::one(), T::one()))
+        PointRangeIterator::new(self.start, self.end, Vector::new(T::one(), T::one()))
     }
 }
 
 impl<T: PointStep> CoordRange<T>
     for ops::RangeInclusive<Point<T>>
 {
-    type PointIterator = PointIteratorInclusive<T, T>;
+    type PointIterator = PointRangeIteratorInclusive<T, T>;
 
     /// # Examples
     /// ```
@@ -90,6 +90,6 @@ impl<T: PointStep> CoordRange<T>
     ///     (Point::new(10, 20)..=Point::new(13, 24)).points().collect::<Vec<_>>());
     /// ```
     fn points(&self) -> Self::PointIterator {
-        PointIteratorInclusive::new(*self.start(), *self.end(), Vector::new(T::one(), T::one()))
+        PointRangeIteratorInclusive::new(*self.start(), *self.end(), Vector::new(T::one(), T::one()))
     }
 }

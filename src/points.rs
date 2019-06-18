@@ -3,7 +3,7 @@ use crate::point::Point;
 use crate::rect::Rect;
 use crate::size::Size;
 use crate::vector::Vector;
-use crate::point_iterator::{PointIterator, PointIteratorInclusive, PointStep};
+use crate::point_range_iterator::{PointRangeIterator, PointRangeIteratorInclusive, PointStep};
 use crate::coord_range::CoordRange;
 use std::ops;
 
@@ -21,7 +21,7 @@ impl<T: Primitive> Size<T> where Point<T>: ops::Add<Self, Output = Point<T>> {
     ///     Size::new(6, 2).points_step(Point::new(3, 2), Vector::new(2, 1)).collect::<Vec<_>>());
     /// ```
     pub fn points_step<S: Primitive>(&self, origin: Point<T>, step: Vector<S>) -> impl Iterator<Item = Point<T>> where T: PointStep<S> {
-        PointIterator::new(origin, origin + *self, step)
+        PointRangeIterator::new(origin, origin + *self, step)
     }
 
     /// # Examples
@@ -57,7 +57,7 @@ impl<T: Primitive> Size<T> where Point<T>: ops::Add<Self, Output = Point<T>> {
         origin: Point<T>,
         step: Vector<S>,
     ) -> impl Iterator<Item = Point<T>> where T: PointStep<S> {
-        PointIteratorInclusive::new(origin, origin + *self, step)
+        PointRangeIteratorInclusive::new(origin, origin + *self, step)
     }
 
     /// # Examples
