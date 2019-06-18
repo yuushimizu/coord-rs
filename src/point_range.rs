@@ -4,17 +4,17 @@ use crate::point_range_iterator::{PointRangeIterator, PointRangeIteratorInclusiv
 use crate::vector::Vector;
 use std::ops;
 
-pub trait CoordRangeBounds<T: Primitive> {
+pub trait PointRangeBounds<T: Primitive> {
     fn contains<U: Primitive>(&self, point: Point<U>) -> bool
     where
         T: PartialOrd<U>,
         U: PartialOrd<T>;
 }
 
-impl<T: Primitive, B: ops::RangeBounds<Point<T>>> CoordRangeBounds<T> for B {
+impl<T: Primitive, B: ops::RangeBounds<Point<T>>> PointRangeBounds<T> for B {
     /// # Examples
     /// ```
-    /// # use coord::CoordRangeBounds;
+    /// # use coord::PointRangeBounds;
     /// # use coord::Point;
     /// assert!((Point::new(0, 100)..Point::new(10, 110)).contains(Point::new(3, 108)));
     /// assert!((Point::new(0, 10)..=Point::new(10, 20)).contains(Point::new(10, 20)));
@@ -41,20 +41,18 @@ impl<T: Primitive, B: ops::RangeBounds<Point<T>>> CoordRangeBounds<T> for B {
     }
 }
 
-pub trait CoordRange<T: Primitive> {
+pub trait PointRange<T: Primitive> {
     type PointIterator: Iterator<Item = Point<T>>;
 
     fn points(&self) -> Self::PointIterator;
 }
 
-impl<T: PointStep> CoordRange<T>
-    for ops::Range<Point<T>>
-{
+impl<T: PointStep> PointRange<T> for ops::Range<Point<T>> {
     type PointIterator = PointRangeIterator<T, T>;
 
     /// # Examples
     /// ```
-    /// # use coord::CoordRange;
+    /// # use coord::PointRange;
     /// # use coord::Point;
     /// assert_eq!(
     ///     vec![
@@ -70,14 +68,12 @@ impl<T: PointStep> CoordRange<T>
     }
 }
 
-impl<T: PointStep> CoordRange<T>
-    for ops::RangeInclusive<Point<T>>
-{
+impl<T: PointStep> PointRange<T> for ops::RangeInclusive<Point<T>> {
     type PointIterator = PointRangeIteratorInclusive<T, T>;
 
     /// # Examples
     /// ```
-    /// # use coord::CoordRange;
+    /// # use coord::PointRange;
     /// # use coord::Point;
     /// assert_eq!(
     ///     vec![
@@ -90,6 +86,10 @@ impl<T: PointStep> CoordRange<T>
     ///     (Point::new(10, 20)..=Point::new(13, 24)).points().collect::<Vec<_>>());
     /// ```
     fn points(&self) -> Self::PointIterator {
-        PointRangeIteratorInclusive::new(*self.start(), *self.end(), Vector::new(T::one(), T::one()))
+        PointRangeIteratorInclusive::new(
+            *self.start(),
+            *self.end(),
+            Vector::new(T::one(), T::one()),
+        )
     }
 }

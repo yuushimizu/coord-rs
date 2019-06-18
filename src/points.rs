@@ -4,7 +4,7 @@ use crate::rect::Rect;
 use crate::size::Size;
 use crate::vector::Vector;
 use crate::point_range_iterator::{PointRangeIterator, PointRangeIteratorInclusive, PointStep};
-use crate::coord_range::CoordRange;
+use crate::point_range::PointRange;
 use std::ops;
 
 impl<T: Primitive> Size<T> where Point<T>: ops::Add<Self, Output = Point<T>> {
